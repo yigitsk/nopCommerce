@@ -5,10 +5,10 @@
 @inject INopFileProvider fileProvider;
 @inject Microsoft.AspNetCore.Hosting.IHostingEnvironment HostingEnvironment
 @using System.Globalization
+@using Nop.Core.Caching
 @using Nop.Web.Framework.UI;
 @using Nop.Core;
 @using Nop.Core.Domain.Localization
-@using Nop.Services.Common
 @inject Nop.Services.Localization.ILanguageService languageService
 @{
     //Kendo UI
@@ -49,9 +49,9 @@
 
     Html.AppendCssFileParts($"~/lib/datatables/css/buttons.bootstrap.css");
     Html.AppendCssFileParts($"~/lib/datatables/css/dataTables.bootstrap.min.css");
-    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/kendo.rtl.min.css");
-    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/kendo.default.min.css");
-    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/kendo.common.min.css");
+    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/styles/web/kendo.rtl.min.css");
+    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/styles/web/kendo.default.min.css");
+    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/styles/web/kendo.common.min.css");
     Html.AppendCssFileParts("~/lib/jquery-ui/themes/smoothness/jquery-ui.min.css");
     Html.AppendCssFileParts("~/lib/fontAwesome/css/font-awesome.min.css");
     //AdminLTE Skins (choose a skin from the css/skins)

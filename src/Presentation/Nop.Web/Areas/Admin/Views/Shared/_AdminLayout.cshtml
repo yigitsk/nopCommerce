@@ -13,11 +13,9 @@
 @inject Nop.Services.Localization.ILanguageService languageService
 @using System.Globalization
 @using Nop.Core.Caching
-@using Nop.Core.Domain.Customers
 @using Nop.Web.Framework.UI;
 @using Nop.Core.Domain
 @using Nop.Core.Domain.Localization
-@using Nop.Services.Common
 @using Nop.Services.Customers
 @using Nop.Services.Helpers
 @using Nop.Services.Security;
@@ -63,9 +61,9 @@
 
     Html.AppendCssFileParts($"~/lib/datatables/css/buttons.bootstrap.css");
     Html.AppendCssFileParts($"~/lib/datatables/css/dataTables.bootstrap.min.css");
-    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/kendo.rtl.min.css");
-    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/kendo.default.min.css");
-    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/kendo.common.min.css");
+    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/styles/web/kendo.rtl.min.css");
+    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/styles/web/kendo.default.min.css");
+    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/styles/web/kendo.common.min.css");
     Html.AppendCssFileParts("~/lib/jquery-ui/themes/smoothness/jquery-ui.min.css");
     Html.AppendCssFileParts("~/lib/fontAwesome/css/font-awesome.min.css");
     Html.AppendCssFileParts("~/lib/typeahead/typeahead.css");
