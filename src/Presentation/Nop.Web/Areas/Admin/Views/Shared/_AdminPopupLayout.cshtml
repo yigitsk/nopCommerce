@@ -30,7 +30,6 @@
         return cultureToUse;
     }
 
-    var jQueryUI = "1.10.3";
 
     var supportRtl = workContext.WorkingLanguage.Rtl && !localizationSettings.IgnoreRtlPropertyForAdminArea;
 
@@ -39,7 +38,7 @@
     {
         Html.AppendCssFileParts("~/css/admin/styles.rtl.css");
         Html.AppendCssFileParts("~/lib/adminLTE/css/AdminLTE.rtl.css");
-        Html.AppendCssFileParts("~/lib/bootstrap/css/bootstrap.rtl.css");
+        Html.AppendCssFileParts("~/lib/bootstrap/css/bootstrap-rtl.css");
     }
     else
     {
@@ -48,24 +47,20 @@
         Html.AppendCssFileParts("~/lib/bootstrap/css/bootstrap.min.css");
     }
 
-    Html.AppendCssFileParts($"~/lib/datatables/buttons.bootstrap.min.css");
-    Html.AppendCssFileParts($"~/lib/datatables/buttons.dataTables.min.css");
-    Html.AppendCssFileParts($"~/lib/datatables/datatables.min.css");
-    Html.AppendCssFileParts($"~/lib/datatables/css/dataTables.bootstrap.css");
-    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/styles/web/kendo.rtl.min.css");
-    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/styles/web/kendo.default.min.css");
-    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/styles/web/kendo.common.min.css");
-    Html.AppendCssFileParts($"~/lib/jquery-ui/jquery-ui-{jQueryUI}/jquery-ui-themes/smoothness/jquery-ui-{jQueryUI}.custom.min.css");
+    Html.AppendCssFileParts($"~/lib/datatables/css/buttons.bootstrap.css");
+    Html.AppendCssFileParts($"~/lib/datatables/css/dataTables.bootstrap.min.css");
+    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/kendo.rtl.min.css");
+    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/kendo.default.min.css");
+    Html.AppendCssFileParts($"~/lib/kendo/{kendoVersion}/kendo.common.min.css");
+    Html.AppendCssFileParts("~/lib/jquery-ui/themes/smoothness/jquery-ui.min.css");
     Html.AppendCssFileParts("~/lib/fontAwesome/css/font-awesome.min.css");
-    Html.AppendCssFileParts("~/lib/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css");
     //AdminLTE Skins (choose a skin from the css/skins)
     Html.AppendCssFileParts("~/lib/adminLTE/css/skins/_all-skins.min.css");
 
     //scripts
-    Html.AppendScriptParts($"~/lib/datatables/buttons.bootstrap.min.js");
-    Html.AppendScriptParts($"~/lib/datatables/dataTables.buttons.min.js");
-    Html.AppendScriptParts($"~/lib/datatables/moment-with-locales-2.22.2.min.js");
-    Html.AppendScriptParts($"~/lib/datatables/datatables.min.js");
+    Html.AppendScriptParts($"~/lib/moment-js/moment-with-locales.min.js");
+    Html.AppendScriptParts($"~/lib/datatables/js/buttons.bootstrap.js");
+    Html.AppendScriptParts($"~/lib/datatables/js/dataTables.buttons.min.js");
     Html.AppendScriptParts($"~/lib/datatables/js/dataTables.bootstrap.min.js");
     Html.AppendScriptParts($"~/lib/datatables/js/jquery.dataTables.min.js");
     Html.AppendScriptParts($"~/lib/kendo/{kendoVersion}/js/cultures/kendo.culture.{currentKendoCulture}.min.js");
@@ -73,8 +68,6 @@
     Html.AppendScriptParts($"~/lib/kendo/{kendoVersion}/js/kendo.ui.core.min.js");
 
     Html.AppendScriptParts("~/js/admin.common.js");
-    Html.AppendScriptParts("~/lib/jquery-migrate/jquery-migrate-3.1.0.min.js");
-    Html.AppendScriptParts($"~/lib/jquery-ui/jquery-ui-{jQueryUI}/jquery-ui-{jQueryUI}.custom.min.js");
 
     // this file can be downloaded from : 
     // https://github.com/johnnyreilly/jquery-validation-globalize 
@@ -94,10 +87,13 @@
 
     Html.AppendScriptParts("~/lib/jquery-validate/jquery.validate.unobtrusive-v3.2.11/jquery.validate.unobtrusive.min.js");
     Html.AppendScriptParts("~/lib/jquery-validate/jquery.validate-v1.19.1/jquery.validate.min.js");
+    Html.AppendScriptParts("~/lib/jquery-migrate/jquery-migrate.min.js");
+    Html.AppendScriptParts("~/lib/jquery-ui/jquery-ui.min.js");
+    Html.AppendScriptParts("~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js");
+    Html.AppendScriptParts("~/lib/jquery-validate/jquery.validate.min.js");
     Html.AppendScriptParts("~/lib/adminLTE/js/adminlte.min.js");
     Html.AppendScriptParts("~/lib/bootstrap/js/bootstrap.min.js");
-    Html.AppendScriptParts("~/lib/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js");
-    Html.AppendScriptParts("~/lib/jquery/jquery-3.4.1.min.js");
+    Html.AppendScriptParts("~/lib/jquery/jquery.min.js");
 
     //page title
     string adminPageTitle = !string.IsNullOrWhiteSpace(ViewBag.PageTitle) ? ViewBag.PageTitle + " / " : "";
