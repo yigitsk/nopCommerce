@@ -140,7 +140,10 @@ namespace Nop.Web.Framework
             });
 
             response.Clear();
-            response.Body.Write(data, 0, data.Length);
+            response.Body
+                .WriteAsync(data, 0, data.Length)
+                .GetAwaiter()
+                .GetResult();
 
             //store a value indicating whether POST has been done
             _webHelper.IsPostBeingDone = true;
