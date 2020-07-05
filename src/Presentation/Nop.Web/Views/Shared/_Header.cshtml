@@ -8,18 +8,21 @@
             @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderSelectors })
         </div>
         <div class="header-links-wrapper">
-            @await Component.InvokeAsync("HeaderLinks")
-            @await Component.InvokeAsync("FlyoutShoppingCart")
+        @await Component.InvokeAsync("HeaderUpperLinks")
         </div>
     </div>
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderMiddle })
-    <div class="header-lower">
-        <div class="header-logo">
-            @await Component.InvokeAsync("Logo")
-        </div>
-        <div class="search-box store-search-box">
-            @await Component.InvokeAsync("SearchBox")
+<div class="header-lower">
+    <div class="header-logo">
+        @await Component.InvokeAsync("Logo")
+        <div class="header-links-wrapper">
+            @await Component.InvokeAsync("HeaderLinks")
+            @await Component.InvokeAsync("FlyoutShoppingCart")
+            <div class="search-box store-search-box">
+                @await Component.InvokeAsync("SearchBox")
+            </div>
         </div>
     </div>
+</div>
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderAfter })
 </div>

@@ -668,7 +668,7 @@ label, label + * {
 }
 .ui-dialog-content .back-in-stock-subscription-page .button-1{
 	border: none;
-	background-color: #4ab2f1;
+	background-color: #000000;
     padding: 10px 15px;
 	font-size: 15px;
 	color: #fff;
@@ -830,11 +830,22 @@ label, label + * {
 	background: url('../images/shopping-bag.png') left center no-repeat;
 	padding: 0 0 0 20px;
 }
+#accountlink {
+  display: block;
+  width: 70%;
+  max-width: 200px;
+  margin: 10px auto 0;
+  padding: 0 20px;
+}
+#accountlink a {
+  background: url('../images/accountlogo.png') left center no-repeat;
+  padding: 0 0 0 20px;
+}
 
 .header-lower {
-	position: relative;
-	z-index: 0;
-	padding: 35px 0;
+  position: relative;
+  z-index: 0;
+  padding: 35px 0;
 }
 
 .header-logo {
@@ -861,24 +872,24 @@ label, label + * {
 }
 .search-box input.search-box-text {
 	float: left;
-	width: 200px;
+	width: 50px;
 	height: 36px;
 	margin: 0 -1px 0 0;
 }
 .search-box .search-box-button {
-	float: left;
-	min-width: 86px;
-	height: 36px;
-	border: none;
-	background-color: #4ab2f1;
-	padding: 0 15px;
-	text-align: center;
-	color: #fff;
-	text-transform: uppercase;
+  float: right;
+  min-width: 20px;
+  height: 36px;
+  border: none;
+  background-color: #000000;
+  padding: 0 15px;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
 }
-.search-box .search-box-button:hover {
-	background-color: #248ece;
-}
+  .search-box .search-box-button:hover {
+    background-color: #cacaca;
+  }
 .search-box .ui-autocomplete-loading {
 	background: #fff url('../images/ajax-loader-small.gif') right center no-repeat;
 }
@@ -2832,7 +2843,7 @@ label, label + * {
 .apply-vendor-page .button-1 {
 	min-width: 140px;
 	border: none;
-	background-color: #4ab2f1;
+	background-color: #000000;
     padding: 10px 30px;
 	text-align: center;
 	font-size: 15px;
@@ -2932,14 +2943,14 @@ label, label + * {
 .password-recovery-page .button-1,
 .account-page .button-1,
 .return-request-page .button-1 {
-	min-width: 140px;
-	border: none;
-	background-color: #4ab2f1;
-    padding: 10px 30px;
-	text-align: center;
-	font-size: 15px;
-	color: #fff;
-	text-transform: uppercase;
+  min-width: 140px;
+  border: none;
+  background-color: #000000;
+  padding: 10px 30px;
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  text-transform: uppercase;
 }
 .registration-page .button-1:hover,
 .registration-result-page .button-1:hover,
@@ -3925,7 +3936,7 @@ label, label + * {
 	display: inline-block;
 	min-width: 140px;
 	border: none;
-	background-color: #4ab2f1;
+	background-color: #000000;
 	padding: 10px 30px;
 	text-align: center;
 	font-size: 15px;
@@ -4307,7 +4318,7 @@ label, label + * {
     text-transform: uppercase;
 }
 .user-agreement-page .button-1:hover {
-	background-color: #248ece;
+	background-color: #000000;
 }
 
 .order-details-page .tax-shipping-info {
@@ -4392,7 +4403,7 @@ label, label + * {
 .search-input .button-1 {
 	min-width: 140px;
 	border: none;
-	background-color: #4ab2f1;
+	background-color: #000000;
     padding: 10px 30px;
 	text-align: center;
 	font-size: 15px;
@@ -5198,7 +5209,7 @@ label, label + * {
 .forum-edit-page .buttons .button-1,
 .move-topic-page .buttons .button-1,
 .private-messages .buttons .button-1 {
-	background-color: #4ab2f1;
+	background-color: #000000;
 }
 .forum-edit-page .buttons .button-1:hover,
 .move-topic-page .buttons .button-1:hover,
@@ -5582,7 +5593,7 @@ pre {
 	margin: 0 auto 40px;
 }
 .menu-toggle {
-	background: #4ab2f1 url('../images/menu-icon.png') right center no-repeat;
+	background: #000000 url('../images/menu-icon.png') right center no-repeat;
 	padding: 15px;
 	font-size: 15px;
 	font-weight: bold;
@@ -5980,16 +5991,14 @@ pre {
 	opacity: 1;
 }
 
-.item-box {
-	width: 32.33333%;
-	margin: 0 0.5% 50px;
-}
+  .item-box {
+    width: 19%;
+    margin: 0 0.5% 50px;
+  }
 .item-box:nth-child(2n+1) {
 	clear: none;
 }
-.item-box:nth-child(3n+1) {
-	clear: both;
-}
+
 
 .product-list .item-box {
 	float: none;
@@ -6597,6 +6606,12 @@ pre {
 	margin: 0;
 	padding: 0 18px;
 }
+  #accountlink {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    padding: 0 18px;
+  }
 
 .flyout-cart {
 	position: absolute;
@@ -6704,18 +6719,22 @@ pre {
 }
 .header-logo {
 	display: table-cell;
-	text-align: left;
 	vertical-align: middle;
+  margin-left:auto;
+  margin-right: auto;
 	font-size: 0;
+  width:100%;
+  z-index:-1;
 }
 .search-box {
-	display: table-cell;
+	display: inline-block;
 	text-align: right;
-	vertical-align: middle;
+	vertical-align: initial;
 }
 .search-box input.search-box-text,
 .search-box .search-box-button {
-	height: 40px;
+	height: 20px;
+  width:150px;
 }
 
 

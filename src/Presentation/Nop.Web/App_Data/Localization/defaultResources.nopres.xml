@@ -17830,10 +17830,10 @@
     <Value>View all results...</Value>
   </LocaleResource>
   <LocaleResource Name="Search.SearchBox.Text.Label">
-    <Value>Search store</Value>
+    <Value>Search products</Value>
   </LocaleResource>
   <LocaleResource Name="Search.SearchBox.Tooltip">
-    <Value>Search store</Value>
+    <Value>Search products</Value>
   </LocaleResource>
   <LocaleResource Name="Search.SearchInDescriptions">
     <Value>Search In product descriptions</Value>
