@@ -1473,7 +1473,7 @@ label, label + * {
 .item-box .picture a:before {
 	content: "";
 	display: block;
-	padding-top: 100%;
+	padding-top: 200%;
 }
 .item-box .picture a img {
 	position: absolute;
@@ -1562,17 +1562,17 @@ label, label + * {
 	border: none;
 	vertical-align: middle;
 }
-.item-box .product-box-add-to-cart-button {
-	width: 60%;
-	background-color: #4ab2f1;
-	text-align: center;
-	font-size: 15px;
-	color: #fff;
-	text-transform: uppercase;
-}
-.item-box .product-box-add-to-cart-button:hover {
-	background-color: #248ece;
-}
+  .item-box .product-box-add-to-cart-button {
+    width: 60%;
+    background-color: #eaeaea;
+    text-align: center;
+    font-size: 15px;
+    color: #444;
+    text-transform: uppercase;
+  }
+    .item-box .product-box-add-to-cart-button:hover {
+      background-color: #dddddd;
+    }
 .item-box .add-to-compare-list-button,
 .item-box .add-to-wishlist-button {
 	width: 20%;

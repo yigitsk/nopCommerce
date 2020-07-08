@@ -481,7 +481,7 @@ namespace Nop.Web.Factories
                 orderBy: (ProductSortingEnum)command.OrderBy,
                 pageIndex: command.PageNumber - 1,
                 pageSize: command.PageSize);
-            model.Products = _productModelFactory.PrepareProductOverviewModels(products).ToList();
+            model.Products = _productModelFactory.PrepareProductOverviewModels(products,prepareSpecificationAttributes:true).ToList();
 
             model.PagingFilteringContext.LoadPagedList(products);
 
