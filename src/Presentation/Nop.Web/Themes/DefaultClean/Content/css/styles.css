@@ -1473,7 +1473,7 @@ label, label + * {
 .item-box .picture a:before {
 	content: "";
 	display: block;
-	padding-top: 200%;
+	padding-top: 250%;
 }
 .item-box .picture a img {
 	position: absolute;
@@ -2038,7 +2038,7 @@ label, label + * {
 }
 .overview .qty-label,
 .variant-overview .qty-label {
-    display: none !important;
+   font-size:30px;
 }
 .overview .qty-input,
 .variant-overview .qty-input {
@@ -6741,16 +6741,16 @@ pre {
 /*** NAVIGATION ***/
 
 
-.header-menu {
-	position: relative;
-	z-index: 5;
-	width: 980px;
-	margin: 0 auto 30px;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	padding: 25px 0;
-	text-align: center;
-}
+  .header-menu {
+    position: relative;
+    z-index: 5;
+    width: 980px;
+    margin: 0 auto 30px;
+    /*border-top: 1px solid #ddd;*/
+    border-bottom: 1px solid #ddd !important;
+    padding: 25px 0;
+    text-align: center;
+  }
 .menu-toggle,
 .sublist-toggle {
 	display: none;

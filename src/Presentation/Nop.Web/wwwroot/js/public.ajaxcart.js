@@ -40,7 +40,24 @@ var AjaxCart = {
             complete: this.resetLoadWaiting,
             error: this.ajaxFailure
         });
-    },
+  },
+
+  //add a product to the cart/wishlist from the catalog pages
+  addproducttocart_catalog: function (urladd,quantity) {
+    if (this.loadWaiting !== false) {
+      return;
+    }
+    this.setLoadWaiting(true);
+
+    $.ajax({
+      cache: false,
+      url: urladd,
+      type: "POST",
+      success: this.success_process,
+      complete: this.resetLoadWaiting,
+      error: this.ajaxFailure
+    });
+  },
 
     //add a product to the cart/wishlist from the product details page
     addproducttocart_details: function (urladd, formselector) {
