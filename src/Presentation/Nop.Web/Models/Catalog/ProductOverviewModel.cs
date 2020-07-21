@@ -26,7 +26,7 @@ namespace Nop.Web.Models.Catalog
         public ProductType ProductType { get; set; }
 
         public bool MarkAsNew { get; set; }
-
+        public decimal Weight { get; set; }
         //price
         public ProductPriceModel ProductPrice { get; set; }
         //picture

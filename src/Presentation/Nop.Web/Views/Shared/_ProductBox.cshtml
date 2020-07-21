@@ -38,10 +38,10 @@
                     @Model.Sku
                 </div>
             }
-            @if (Model.SpecificationAttributeModels.Where(x => x.SpecificationAttributeName == "Weight").Any())
+            @if (Model.Weight>0)
             {
                 <div class="sku">
-                    @Model.SpecificationAttributeModels.Where(x => x.SpecificationAttributeName == "Weight").Select(x => x.ValueRaw).FirstOrDefault()
+                    @String.Concat(String.Format("{0:0.00}",Model.Weight)," gr")
                 </div>
             }
             @if (Model.ReviewOverviewModel.AllowCustomerReviews)
@@ -100,8 +100,7 @@
                         {
                             addToCartText = T("ShoppingCart.PreOrder").Text;
                         }
-                        <span>@T("quantity")</span>
-                        <input type="number" placeholder="Pcs" name="quantityinput" value="@T(quantity)" class="quantity" onkeypress="return isNumberKey(event)" />
+                        <input type="number" placeholder="Pcs" name="quantityinput" value="@T(quantity)" onkeypress="return isNumberKey(event)" class="button-2" />
                         <input type="button" value="@(addToCartText)" class="button-2 product-box-add-to-cart-button" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink','@quantity');return false;" />
                     }
                     @if (!Model.ProductPrice.DisableAddToCompareListButton)

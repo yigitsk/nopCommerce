@@ -237,12 +237,18 @@
                                 },
                                 new ColumnProperty(nameof(ProductModel.Name))
                                 {
-                                    Title = T("Admin.Catalog.Products.Fields.Name").Text
+                                    Title = T("Admin.Catalog.Products.Fields.Name").Text,
+                                    Width = "100"
                                 },
                                 new ColumnProperty(nameof(ProductModel.Sku))
                                 {
                                     Title = T("Admin.Catalog.Products.Fields.Sku").Text,
                                     Width = "100"
+                                },
+                                 new ColumnProperty(nameof(ProductModel.Weight))
+                                {
+                                    Title = T("Admin.Catalog.Products.Fields.Weight").Text,
+                                    Width = "150",
                                 },
                                 new ColumnProperty(nameof(ProductModel.Price))
                                 {

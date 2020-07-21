@@ -1099,6 +1099,7 @@ namespace Nop.Web.Factories
                 {
                     Id = product.Id,
                     Name = _localizationService.GetLocalized(product, x => x.Name),
+                    Weight = product.Weight,
                     ShortDescription = _localizationService.GetLocalized(product, x => x.ShortDescription),
                     FullDescription = _localizationService.GetLocalized(product, x => x.FullDescription),
                     SeName = _urlRecordService.GetSeName(product),
