@@ -815,8 +815,8 @@ namespace Nop.Web.Areas.Admin.Factories
                 model.OrderMaximumQuantity = 10000;
                 model.TaxCategoryId = _taxSettings.DefaultTaxCategoryId;
                 model.UnlimitedDownloads = true;
-                model.IsShipEnabled = true;
-                model.AllowCustomerReviews = true;
+                model.IsShipEnabled = false;
+                model.AllowCustomerReviews = false;
                 model.Published = true;
                 model.VisibleIndividually = true;
             }
