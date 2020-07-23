@@ -48,7 +48,8 @@ var AjaxCart = {
       return;
     }
     this.setLoadWaiting(true);
-
+    urladd = urladd.substring(0, urladd.length - 1);
+    urladd = urladd + quantity;
     $.ajax({
       cache: false,
       url: urladd,
