@@ -1,4 +1,13 @@
-﻿<div class="header">
+﻿
+<style>
+    @@media (min-width:992px) {
+        .header {
+            position: relative;
+            left: 50px;
+        }
+    }
+</style>
+<div class="header">
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderBefore })
     <div class="header-upper">
         <div class="header-selectors-wrapper">
@@ -8,21 +17,21 @@
             @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderSelectors })
         </div>
         <div class="header-links-wrapper">
-        @await Component.InvokeAsync("HeaderUpperLinks")
+            @await Component.InvokeAsync("HeaderUpperLinks")
         </div>
     </div>
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderMiddle })
-<div class="header-lower">
-    <div class="header-logo">
-        @await Component.InvokeAsync("Logo")
-    </div>
-    <div class="header-links-wrapper">
-        @await Component.InvokeAsync("HeaderLinks")
-        @await Component.InvokeAsync("FlyoutShoppingCart")
-        <div class="search-box store-search-box">
-            @await Component.InvokeAsync("SearchBox")
+    <div class="header-lower">
+        <div class="header-logo">
+            @await Component.InvokeAsync("Logo")
+        </div>
+        <div class="header-links-wrapper">
+            @await Component.InvokeAsync("HeaderLinks")
+            @await Component.InvokeAsync("FlyoutShoppingCart")
+            <div class="search-box store-search-box">
+                @await Component.InvokeAsync("SearchBox")
+            </div>
         </div>
     </div>
-</div>
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.HeaderAfter })
 </div>
