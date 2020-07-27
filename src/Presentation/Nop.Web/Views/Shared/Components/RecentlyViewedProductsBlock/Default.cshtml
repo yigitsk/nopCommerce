@@ -17,7 +17,9 @@
                                 <img alt="@product.DefaultPictureModel.AlternateText" src="@product.DefaultPictureModel.ImageUrl" title="@product.DefaultPictureModel.Title" />
                             </a>
                         }
+                    <li>
                         <a class="product-name" href="@Url.RouteUrl("Product", new { SeName = product.SeName })">@product.Name</a>
+                    </li>
                     </li>
                 }
             </ul>

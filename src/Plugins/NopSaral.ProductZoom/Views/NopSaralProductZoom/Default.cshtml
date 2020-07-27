@@ -1,0 +1,45 @@
+﻿@model Nop.Web.Models.Catalog.ProductDetailsModel
+@{
+    Html.AddScriptParts(ResourceLocation.Footer, "~/Plugins/NopSaral.ProductZoom/Content/Scripts/nopzoom.js");
+    Html.AddCssFileParts("~/Plugins/NopSaral.ProductZoom/Content/Styles/nopzoom.css");
+
+}
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+
+<div class="gallery">
+    <div class="picture">
+        @if (Model.DefaultPictureZoomEnabled)
+        {
+            <img class="nopzoom" src="@Model.DefaultPictureModel.ImageUrl" xoriginal="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" />
+        }
+        else
+        {
+            <img class="nopzoom" src="@Model.DefaultPictureModel.ImageUrl" xoriginal="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" />
+        }
+    </div>
+    @if (Model.PictureModels.Count > 1)
+    {
+        <div class="picture-thumbs">        
+            @foreach (var picture1 in Model.PictureModels)
+            {
+                <div class="thumb-item">
+                    <a href="@picture1.FullSizeImageUrl">
+                        <img class="nopzoom-gallery" width="80" src="@picture1.ThumbImageUrl" xpreview="@picture1.FullSizeImageUrl" title="@picture1.Title">
+                    </a>
+                </div>
+            }    
+        </div>
+    }
+</div>
+<script asp-location="Footer">
+    $(document).ready(function () {
+        var scrolled = 0;
+        $(".nopzoom, .nopzoom-gallery").nopzoom({ tint: '#333', Xoffset: 15 });
+    });
+</script>
+
+
+
+
+

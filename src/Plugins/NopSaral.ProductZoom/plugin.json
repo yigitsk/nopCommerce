@@ -1,0 +1,11 @@
+﻿{
+  "Group": "NopSaral",
+  "FriendlyName": "Product Zoom",
+  "SystemName": "NopSaral.ProductZoom",
+  "Version": "4.30",
+  "SupportedVersions": [ "4.30" ],
+  "Author": "nopSaral team",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.NopSaral.ProductZoom.dll",
+  "Description": "\"This plugin allows you to product by zoom on product details page. please comment this line-- @await Html.PartialAsync(\"_ProductDetailsPictures\", Model)\" on path-- <your project>\\Presentation\\Nop.Web\\Views\\Product\\ProductTemplate.Simple.cshtml. if you are using any theme then --<your project>\\Presentation\\Nop.Web\\Themes\\<your theme name>\\Views\\Product\\ProductTemplate.Simple.cshtml. "
+}
