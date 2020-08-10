@@ -521,6 +521,18 @@ namespace Nop.Services.Catalog
             return result;
         }
 
+
+        public virtual IList<AclRecord> GetAclRecords(int productId)
+        {
+            if (!_catalogSettings.IgnoreAcl)
+            {
+                return (from p in _aclRepository.Table
+                             where p.EntityName == "Product" && p.EntityId == productId
+                            select p).ToList();
+            }
+            return null;
+        }
+
         /// <summary>
         /// Search products
         /// </summary>

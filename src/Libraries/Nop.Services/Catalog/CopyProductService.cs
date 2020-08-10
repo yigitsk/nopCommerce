@@ -4,8 +4,10 @@ using System.Linq;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Discounts;
 using Nop.Core.Domain.Media;
+using Nop.Core.Domain.Security;
 using Nop.Services.Localization;
 using Nop.Services.Media;
+using Nop.Services.Security;
 using Nop.Services.Seo;
 using Nop.Services.Stores;
 
@@ -24,6 +26,7 @@ namespace Nop.Services.Catalog
         private readonly ILocalizationService _localizationService;
         private readonly ILocalizedEntityService _localizedEntityService;
         private readonly IManufacturerService _manufacturerService;
+        private readonly IAclService _aclService;
         private readonly IPictureService _pictureService;
         private readonly IProductAttributeParser _productAttributeParser;
         private readonly IProductAttributeService _productAttributeService;
@@ -50,7 +53,8 @@ namespace Nop.Services.Catalog
             IProductTagService productTagService,
             ISpecificationAttributeService specificationAttributeService,
             IStoreMappingService storeMappingService,
-            IUrlRecordService urlRecordService)
+            IUrlRecordService urlRecordService,
+            IAclService aclService)
         {
             _categoryService = categoryService;
             _downloadService = downloadService;
@@ -66,6 +70,7 @@ namespace Nop.Services.Catalog
             _specificationAttributeService = specificationAttributeService;
             _storeMappingService = storeMappingService;
             _urlRecordService = urlRecordService;
+            _aclService = aclService;
         }
 
         #endregion
@@ -432,6 +437,25 @@ namespace Nop.Services.Catalog
         }
 
         /// <summary>
+        /// Copy acl records mapping
+        /// </summary>
+        /// <param name="product">Product</param>
+        /// <param name="productCopy">New product</param>
+        private void CopyAclMapping(Product product, Product productCopy)
+        {
+            foreach(var aclRecord in _aclService.GetAclRecordsForProduct(product.Id))
+            {
+                var aclRecordsCopy = new AclRecord
+                {
+                    EntityName = aclRecord.EntityName,
+                    CustomerRoleId = aclRecord.CustomerRoleId,
+                    EntityId = productCopy.Id
+                };
+                _aclService.InsertAclRecord(aclRecordsCopy);
+            }
+        }
+
+        /// <summary>
         /// Copy category mapping
         /// </summary>
         /// <param name="product">Product</param>
@@ -781,6 +805,8 @@ namespace Nop.Services.Catalog
             CopyAttributesMapping(product, productCopy, originalNewPictureIdentifiers);
             //product <-> discounts mapping
             CopyDiscountsMapping(product, productCopy);
+            //product <-> aclrecords
+            CopyAclMapping(product, productCopy);
             //store mapping
             var selectedStoreIds = _storeMappingService.GetStoresIdsWithAccess(product);
             foreach (var id in selectedStoreIds)
@@ -800,6 +826,8 @@ namespace Nop.Services.Catalog
 
             return productCopy;
         }
+
+
 
         #endregion
     }

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Nop.Core;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Security;
@@ -30,6 +30,9 @@ namespace Nop.Services.Security
         /// <param name="entity">Entity</param>
         /// <returns>ACL records</returns>
         IList<AclRecord> GetAclRecords<T>(T entity) where T : BaseEntity, IAclSupported;
+
+        IList<AclRecord> GetAclRecordsForProduct(int productId);
+
 
         /// <summary>
         /// Inserts an ACL record

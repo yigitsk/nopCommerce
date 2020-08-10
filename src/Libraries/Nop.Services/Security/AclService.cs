@@ -100,6 +100,17 @@ namespace Nop.Services.Security
             return aclRecords;
         }
 
+        public virtual IList<AclRecord> GetAclRecordsForProduct(int productId)
+        {
+            if (!_catalogSettings.IgnoreAcl)
+            {
+                return (from p in _aclRecordRepository.Table
+                        where p.EntityName == "Product" && p.EntityId == productId
+                        select p).ToList();
+            }
+            return null;
+        }
+
         /// <summary>
         /// Inserts an ACL record
         /// </summary>
