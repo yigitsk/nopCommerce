@@ -53,7 +53,48 @@
         }
         else
         {
-            <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
+           <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
+                <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
+            </a>
+            <script asp-location="Footer">
+                $(document).ready(function() {
+                    $('#main-product-img-lightbox-anchor-@Model.Id').magnificPopup({
+                        type: 'image',
+                        callbacks: {
+                            open: function () {
+                                $(".mfp-figure figure").css("cursor", "zoom-in");
+                                zoom(zoom_percent);
+                            },
+                            close: function () {
+                                // Will fire when popup is closed
+                            }
+                            // e.t.c.
+                        }
+                    });
+                });
+                var zoom_percent = "100";
+                function zoom(zoom_percent) {
+                    $(".mfp-figure figure").click(function () {
+                        switch (zoom_percent) {
+                            case "100":
+                                zoom_percent = "120";
+                                break;
+                            case "120":
+                                zoom_percent = "150";
+                                break;
+                            case "150":
+                                zoom_percent = "200";
+                                $(".mfp-figure figure").css("cursor", "zoom-out");
+                                break;
+                            case "200":
+                                zoom_percent = "100";
+                                $(".mfp-figure figure").css("cursor", "zoom-in");
+                                break;
+                        }
+                        $(this).css("zoom", zoom_percent + "%");
+                    });
+                }
+            </script>
         }
     </div>
     @if (Model.PictureModels.Count > 1 && Model.DefaultPictureZoomEnabled)
@@ -75,16 +116,48 @@
                         removalDelay: 300,
                         gallery: {
                             enabled: true,
-                            navigateByImgClick: true,
+                            navigateByImgClick: false,
                             preload: [0, 1],
                             tPrev: '@T("Media.MagnificPopup.Previous")',
                             tNext: '@T("Media.MagnificPopup.Next")',
                             tCounter: '@T("Media.MagnificPopup.Counter")'
                         },
+                        callbacks: {
+                            open: function () {
+                                $(".mfp-figure figure").css("cursor", "zoom-in");
+                                zoom(zoom_percent);
+                            },
+                            close: function () {
+                                // Will fire when popup is closed
+                            }
+                            // e.t.c.
+                        },
                         tClose: '@T("Media.MagnificPopup.Close")',
                         tLoading: '@T("Media.MagnificPopup.Loading")'
                     });
-            });
+            })
+            var zoom_percent = "100";
+            function zoom(zoom_percent) {
+                $(".mfp-figure figure").click(function () {
+                    switch (zoom_percent) {
+                        case "100":
+                            zoom_percent = "120";
+                            break;
+                        case "120":
+                            zoom_percent = "150";
+                            break;
+                        case "150":
+                            zoom_percent = "200";
+                            $(".mfp-figure figure").css("cursor", "zoom-out");
+                            break;
+                        case "200":
+                            zoom_percent = "100";
+                            $(".mfp-figure figure").css("cursor", "zoom-in");
+                            break;
+                    }
+                    $(this).css("zoom", zoom_percent + "%");
+                });
+            };
         </script>
         <script asp-location="Footer">
             $(document).ready(function() {
