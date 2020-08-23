@@ -56,72 +56,24 @@
         else
         {
             <div class="picture">
-
-                <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
+                <a class="thumb-item" href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title">
                     <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
                 </a>
-                <script asp-location="Footer">
-                $(document).ready(function() {
-                    $('#main-product-img-lightbox-anchor-@Model.Id').magnificPopup({
-                        type: 'image',
-                        removalDelay: 300,
-                        gallery: {
-                            enabled: true,
-                            navigateByImgClick: false,
-                            preload: [0, 1],
-                            tPrev: '@T("Media.MagnificPopup.Previous")',
-                            tNext: '@T("Media.MagnificPopup.Next")',
-                            tCounter: '@T("Media.MagnificPopup.Counter")'
-                        },
-                        callbacks: {
-                            open: function () {
-                                $(".mfp-figure figure").css("cursor", "zoom-in");
-                                zoom(zoom_percent);
-                            },
-                            close: function () {
-                                // Will fire when popup is closed
-                            }
-                            // e.t.c.
-                        },
-                        tClose: '@T("Media.MagnificPopup.Close")',
-                        tLoading: '@T("Media.MagnificPopup.Loading")'
-                    });
-                });
-                var zoom_percent = "100";
-                function zoom(zoom_percent) {
-                    $(".mfp-figure figure").click(function () {
-                        switch (zoom_percent) {
-                            case "100":
-                                zoom_percent = "120";
-                                break;
-                            case "120":
-                                zoom_percent = "150";
-                                break;
-                            case "150":
-                                zoom_percent = "200";
-                                $(".mfp-figure figure").css("cursor", "zoom-out");
-                                break;
-                            case "200":
-                                zoom_percent = "100";
-                                $(".mfp-figure figure").css("cursor", "zoom-in");
-                                break;
-                        }
-                        $(this).css("zoom", zoom_percent + "%");
-                    });
-                }
-                </script>
             </div>
             <div class="picture-thumbs">
                 @foreach (var picture in Model.PictureModels)
                 {
+                    @if(picture.FullSizeImageUrl != Model.DefaultPictureModel.FullSizeImageUrl)
+                    { 
                     <a class="thumb-item" href="@picture.FullSizeImageUrl" alt="@picture.AlternateText" title="@picture.Title">
                         <img src="@picture.ThumbImageUrl" alt="@picture.AlternateText" title="@picture.Title" data-defaultsize="@picture.ImageUrl" data-fullsize="@picture.FullSizeImageUrl" />
                     </a>
+                    }
                 }
             </div>
             <script asp-location="Footer">
             $(document).ready(function() {
-                $('.picture-thumbs').magnificPopup(
+                $('.picture-thumbs,.picture').magnificPopup(
                     {
                         type: 'image',
                         delegate: 'a',
