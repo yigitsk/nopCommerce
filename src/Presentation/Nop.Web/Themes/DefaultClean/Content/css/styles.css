@@ -201,6 +201,25 @@ label, label + * {
 	padding: 0 0 0 36px;
 	list-style: disc;
 }
+
+.tabletopic {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 10px;
+  margin: 0 auto;
+}
+
+.rowtopic {
+  display: table-row;
+}
+
+.celltopic {
+  display: table-cell;
+  padding: 5px;
+  vertical-align: top;
+  margin: auto;
+}
+
 .category-description ol,
 .manufacturer-description ol,
 .full-description ol,
@@ -1018,6 +1037,13 @@ label, label + * {
 .follow-us .social .facebook a {
 	background-position: 0 0;
 }
+
+li.logo {
+  line-height: 10px;
+}
+  li.logo img {
+    vertical-align: middle;
+  }
 .follow-us .social .twitter a {
 	background-position: -38px 0;
 }

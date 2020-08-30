@@ -2,6 +2,7 @@
 using System.Linq;
 using Nop.Core;
 using Nop.Core.Domain.Topics;
+using Nop.Services.Customers;
 using Nop.Services.Localization;
 using Nop.Services.Security;
 using Nop.Services.Seo;
@@ -25,6 +26,8 @@ namespace Nop.Web.Factories
         private readonly ITopicService _topicService;
         private readonly ITopicTemplateService _topicTemplateService;
         private readonly IUrlRecordService _urlRecordService;
+        private readonly ICustomerService _customerService;
+        private readonly IWorkContext _workContext;
 
         #endregion
 
@@ -36,7 +39,9 @@ namespace Nop.Web.Factories
             IStoreMappingService storeMappingService,
             ITopicService topicService,
             ITopicTemplateService topicTemplateService,
-            IUrlRecordService urlRecordService)
+            IUrlRecordService urlRecordService,
+            ICustomerService customerService,
+            IWorkContext workContext)
         {
             _aclService = aclService;
             _localizationService = localizationService;
@@ -45,6 +50,8 @@ namespace Nop.Web.Factories
             _topicService = topicService;
             _topicTemplateService = topicTemplateService;
             _urlRecordService = urlRecordService;
+            _customerService = customerService;
+            _workContext = workContext;
         }
 
         #endregion
@@ -61,6 +68,9 @@ namespace Nop.Web.Factories
             if (topic == null)
                 throw new ArgumentNullException(nameof(topic));
 
+            var customer = _workContext.CurrentCustomer;
+
+
             var model = new TopicModel
             {
                 Id = topic.Id,
@@ -73,7 +83,8 @@ namespace Nop.Web.Factories
                 MetaDescription = _localizationService.GetLocalized(topic, x => x.MetaDescription),
                 MetaTitle = _localizationService.GetLocalized(topic, x => x.MetaTitle),
                 SeName = _urlRecordService.GetSeName(topic),
-                TopicTemplateId = topic.TopicTemplateId
+                TopicTemplateId = topic.TopicTemplateId,
+                IsAuthenticated = _customerService.IsRegistered(customer)
             };
 
             return model;

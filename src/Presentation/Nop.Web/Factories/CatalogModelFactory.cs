@@ -595,6 +595,8 @@ namespace Nop.Web.Factories
                 _workContext.WorkingLanguage,
                 _webHelper.IsCurrentConnectionSecured());
 
+            var customer = _workContext.CurrentCustomer;
+
             var model = _staticCacheManager.Get(categoriesCacheKey, () =>
                 _categoryService.GetAllCategoriesDisplayedOnHomepage()
                     .Select(category =>
@@ -608,6 +610,7 @@ namespace Nop.Web.Factories
                             MetaDescription = _localizationService.GetLocalized(category, x => x.MetaDescription),
                             MetaTitle = _localizationService.GetLocalized(category, x => x.MetaTitle),
                             SeName = _urlRecordService.GetSeName(category),
+                            IsAuthenticated = _customerService.IsRegistered(customer),
                         };
 
                         //prepare picture model

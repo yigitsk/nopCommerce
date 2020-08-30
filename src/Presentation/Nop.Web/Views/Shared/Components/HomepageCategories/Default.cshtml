@@ -1,5 +1,5 @@
 ﻿@model IList<CategoryModel>
-@if (Model.Count > 0)
+@if (Model.Count > 0 && Model[0].IsAuthenticated == true)
 {
     <div class="category-grid home-page-category-grid">
         <div class="item-grid">
@@ -22,4 +22,27 @@
             }
         </div>
     </div>
+}
+else
+{
+<div class="topic-block">
+        <div class="topic-block-title">
+            <h2>Carra Jewellery Inc.</h2>
+        </div>
+    <div class="tabletopic">
+        <div class="rowtopic">
+            <div class="topic-block-body celltopic">
+                @Html.Raw(@"<p>Yenibosna Merkez Mah. Ladin Sk. No:4</p>
+                <p>Kuyumcukent Atölye Blogu 1.Kat 1.Sk No:11</p>
+                <p>34197 Bahçelievler - Istanbul - Turkey</p>
+                <p> </p>
+                <p>info@carrajewellery.com</p>")
+            </div>
+            <div class="topic-block-body celltopic">
+                <img src="../Themes/DefaultClean/Content/images/whatsappqr.jpeg" alt="+905327653532" />
+                <li class="logo" style="list-style-type: none"><img src="../Themes/DefaultClean/Content/images/whatsapp.png">+905327653532</li>
+            </div>
+        </div>
+    </div>
+</div>
 }

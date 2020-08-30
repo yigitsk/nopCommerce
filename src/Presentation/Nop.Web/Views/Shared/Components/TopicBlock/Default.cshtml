@@ -1,7 +1,7 @@
 ﻿@model TopicModel
 @if (Model.IsPasswordProtected)
 {
-<script asp-location="Footer">
+    <script asp-location="Footer">
         $(document).ready(function () {
             $('#button-password-@Model.Id').on('click', function() {
                 var postData = {
@@ -41,16 +41,16 @@
             $('#ph-topic-@Model.Id').hide();
             $('#ph-password-@Model.Id #password-@Model.Id').select().focus();
         });
-</script>
+    </script>
     <div class="topic-password" id="ph-password-@Model.Id">
         <form asp-route="TopicAuthenticate" method="post" autocomplete="off">
-            <input asp-for="Id" id="topic-@Model.Id" type="hidden"/>
+            <input asp-for="Id" id="topic-@Model.Id" type="hidden" />
             <div class="enter-password-title">
                 @T("Topic.EnterPassword")
             </div>
             <div class="enter-password-form">
-                <input name="password" type="password" id="password-@(Model.Id)"/>
-                <input type="submit" id="button-password-@Model.Id" value="@T("Topic.Button")" class="button-1 topic-password-button"/>
+                <input name="password" type="password" id="password-@(Model.Id)" />
+                <input type="submit" id="button-password-@Model.Id" value="@T("Topic.Button")" class="button-1 topic-password-button" />
             </div>
             <div class="password-error" id="password-error-@Model.Id" style="display: none;"></div>
         </form>
@@ -73,8 +73,19 @@ else
                 <h2>@Model.Title</h2>
             </div>
         }
-        <div class="topic-block-body">
-            @Html.Raw(Model.Body)
+        <div class="tabletopic">
+            <div class="rowtopic">
+                <div class="topic-block-body celltopic">
+                    @Html.Raw(Model.Body)
+                </div>
+                <div class="topic-block-body celltopic">
+                    @if (!string.IsNullOrEmpty(Model.Title))
+                    {
+                        <img src="../Themes/DefaultClean/Content/images/whatsappqr.jpeg" alt="+905327653532" />
+                        <li class="logo" style="list-style-type: none"><img src="../Themes/DefaultClean/Content/images/whatsapp.png">+905327653532</li>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 }
