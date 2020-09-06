@@ -1627,6 +1627,9 @@ namespace Nop.Web.Areas.Admin.Controllers
 
             _pictureService.SetSeoFilename(pictureId, _pictureService.GetPictureSeName(product.Name));
 
+            if(displayOrder==0)
+                displayOrder = _productService.GetMaxDisplayOrderByProductId(productId)+1;
+
             _productService.InsertProductPicture(new ProductPicture
             {
                 PictureId = pictureId,

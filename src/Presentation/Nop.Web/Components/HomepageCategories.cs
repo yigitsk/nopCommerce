@@ -18,7 +18,9 @@ namespace Nop.Web.Components
         {
             var model = _catalogModelFactory.PrepareHomepageCategoryModels();
             if (!model.Any())
-                return Content("");
+            {
+                return View(model);
+            }
 
             return View(model);
         }

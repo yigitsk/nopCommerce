@@ -2137,6 +2137,18 @@ namespace Nop.Services.Catalog
             return productPictures;
         }
 
+        public virtual int GetMaxDisplayOrderByProductId(int productId)
+        {
+            var query = from pp in _productPictureRepository.Table
+                        where pp.ProductId == productId
+                        orderby pp.DisplayOrder descending
+                        select pp.DisplayOrder;
+
+            var productPictures = query.Take(1);
+
+            return productPictures.First();
+        }
+
         /// <summary>
         /// Gets a product picture
         /// </summary>
@@ -2160,7 +2172,10 @@ namespace Nop.Services.Catalog
                 throw new ArgumentNullException(nameof(productPicture));
 
             _productPictureRepository.Insert(productPicture);
-
+            if (_productPictureRepository.Table.ToList().Where(p => p.DisplayOrder == productPicture.DisplayOrder && p.PictureId != productPicture.PictureId).Any())
+            {
+                UpdateDisplayOrders(productPicture.DisplayOrder,productPicture.PictureId);
+            }
             //event notification
             _eventPublisher.EntityInserted(productPicture);
         }
@@ -2175,9 +2190,22 @@ namespace Nop.Services.Catalog
                 throw new ArgumentNullException(nameof(productPicture));
 
             _productPictureRepository.Update(productPicture);
-
+            if(_productPictureRepository.Table.ToList().Where(p=>p.DisplayOrder== productPicture.DisplayOrder && p.PictureId!=productPicture.PictureId).Any())
+            {
+                UpdateDisplayOrders(productPicture.DisplayOrder,productPicture.PictureId);
+            }
             //event notification
             _eventPublisher.EntityUpdated(productPicture);
+        }
+
+        private void UpdateDisplayOrders(int displayOrder, int pictureId)
+        {
+           var productPictures = _productPictureRepository.Table.ToList().Where(p => p.DisplayOrder >= displayOrder && p.PictureId != pictureId).ToList();
+           foreach(var picture in productPictures)
+            {
+                picture.DisplayOrder++;
+                _productPictureRepository.Update(picture);
+            }
         }
 
         /// <summary>

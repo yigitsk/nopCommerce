@@ -625,6 +625,8 @@ namespace Nop.Services.Catalog
         /// <returns>Product pictures</returns>
         IList<ProductPicture> GetProductPicturesByProductId(int productId);
 
+        int GetMaxDisplayOrderByProductId(int productId);
+
         /// <summary>
         /// Gets a product picture
         /// </summary>
