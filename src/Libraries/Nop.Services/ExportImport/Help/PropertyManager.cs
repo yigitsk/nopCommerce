@@ -212,6 +212,24 @@ namespace Nop.Services.ExportImport.Help
         {
             foreach (var caption in _properties.Values)
             {
+                var cell = worksheet.Cells[row, caption.PropertyOrderPosition + cellOffset+1];
+                cell.Value = caption;
+
+                SetCaptionStyle(cell);
+                cell.Style.Hidden = false;
+            }
+        }
+
+        /// <summary>
+        /// Write caption (first row) to XLSX worksheet
+        /// </summary>
+        /// <param name="worksheet">worksheet</param>
+        /// <param name="row">Row number</param>
+        /// <param name="cellOffset">Cell offset</param>
+        public virtual void WriteCaptionForCarra(ExcelWorksheet worksheet, int row = 1, int cellOffset = 0)
+        {
+            foreach (var caption in _properties.Values)
+            {
                 var cell = worksheet.Cells[row, caption.PropertyOrderPosition + cellOffset];
                 cell.Value = caption;
 

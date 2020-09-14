@@ -705,6 +705,81 @@ namespace Nop.Services.ExportImport
             return stream.ToArray();
         }
 
+        private byte[] ExportOrderToCarraXlsxWithProducts(PropertyByName<Order>[] properties, IEnumerable<Order> itemsToExport)
+        {
+            var orderItemProperties = new[]
+            {
+                new PropertyByName<OrderItem>("Name", oi => _productService.GetProductById(oi.ProductId).Name),
+                new PropertyByName<OrderItem>("Sku", oi => _productService.GetProductById(oi.ProductId).Sku),
+                /*new PropertyByName<OrderItem>("PriceExclTax", oi => oi.UnitPriceExclTax),
+                new PropertyByName<OrderItem>("PriceInclTax", oi => oi.UnitPriceInclTax),*/
+                new PropertyByName<OrderItem>("Quantity", oi => oi.Quantity),
+                new PropertyByName<OrderItem>("Weight", oi=>oi.ItemWeight),
+                new PropertyByName<OrderItem>("Total Weight", oi=> oi.ItemWeight*oi.Quantity)
+              /*  new PropertyByName<OrderItem>("DiscountExclTax", oi => oi.DiscountAmountExclTax),
+                new PropertyByName<OrderItem>("DiscountInclTax", oi => oi.DiscountAmountInclTax),
+                new PropertyByName<OrderItem>("TotalExclTax", oi => oi.PriceExclTax),
+                new PropertyByName<OrderItem>("TotalInclTax", oi => oi.PriceInclTax)*/
+            };
+
+            var orderItemsManager = new PropertyManager<OrderItem>(orderItemProperties, _catalogSettings);
+
+            using var stream = new MemoryStream();
+            // ok, we can run the real code of the sample now
+            using (var xlPackage = new ExcelPackage(stream))
+            {
+                // uncomment this line if you want the XML written out to the outputDir
+                //xlPackage.DebugMode = true; 
+
+                // get handles to the worksheets
+                var worksheet = xlPackage.Workbook.Worksheets.Add(typeof(Order).Name);
+                worksheet.InsertRow(1, 6);
+                worksheet.Cells["A1"].Value = "Carra Jewellery";
+                worksheet.Cells["F3"].Value = " CARRA KUYUMCULUK SAN VE TIC A.S.";
+                worksheet.Cells["F4"].Value = " Adres Satırı 1";
+                worksheet.Cells["F5"].Value = " Adres Satırı 2";
+                worksheet.Cells["F6"].Value = " Adres Satırı 3";
+                var fpWorksheet = xlPackage.Workbook.Worksheets.Add("DataForProductsFilters");
+                fpWorksheet.Hidden = eWorkSheetHidden.VeryHidden;
+
+                //create Headers and format them 
+                var manager = new PropertyManager<Order>(properties, _catalogSettings);
+                manager.WriteCaption(worksheet,7);
+
+                var row = 8;
+                foreach (var order in itemsToExport)
+                {
+                    manager.CurrentObject = order;
+                    manager.WriteToXlsx(worksheet, row++);
+
+                    //a vendor should have access only to his products
+                    var orderItems = _orderService.GetOrderItems(order.Id, vendorId: _workContext.CurrentVendor?.Id ?? 0);
+
+                    if (!orderItems.Any())
+                        continue;
+
+                    orderItemsManager.WriteCaptionForCarra(worksheet, row, 1);
+                    worksheet.Row(row).OutlineLevel = 1;
+                    worksheet.Row(row).Collapsed = false;
+
+                    foreach (var orederItem in orderItems)
+                    {
+                        row++;
+                        orderItemsManager.CurrentObject = orederItem;
+                        orderItemsManager.WriteToXlsx(worksheet, row, 2, fpWorksheet);
+                        worksheet.Row(row).OutlineLevel = 1;
+                        //worksheet.Row(row).Collapsed = true;
+                    }
+
+                    row++;
+                }
+
+                xlPackage.Save();
+            }
+
+            return stream.ToArray();
+        }
+
         private string GetCustomCustomerAttributes(Customer customer)
         {
             var selectedCustomerAttributes = _genericAttributeService.GetAttribute<string>(customer, NopCustomerDefaults.CustomCustomerAttributes);
@@ -1529,9 +1604,8 @@ namespace Nop.Services.ExportImport
             var properties = new[]
             {
                 new PropertyByName<Order>("OrderId", p => p.Id),
-                new PropertyByName<Order>("StoreId", p => p.StoreId),
-                new PropertyByName<Order>("OrderGuid", p => p.OrderGuid, ignore),
                 new PropertyByName<Order>("CustomerId", p => p.CustomerId, ignore),
+                new PropertyByName<Order>("OrderDate", p => p.CreatedOnUtc.Date),
                 new PropertyByName<Order>("OrderStatusId", p => p.OrderStatusId, ignore),
                 new PropertyByName<Order>("PaymentStatusId", p => p.PaymentStatusId),
                 new PropertyByName<Order>("ShippingStatusId", p => p.ShippingStatusId, ignore),
@@ -1589,6 +1663,31 @@ namespace Nop.Services.ExportImport
             return _orderSettings.ExportWithProducts
                 ? ExportOrderToXlsxWithProducts(properties, orders)
                 : new PropertyManager<Order>(properties, _catalogSettings).ExportToXlsx(orders);
+        }
+
+        /// <summary>
+        /// Export orders to Carra XLSX
+        /// </summary>
+        /// <param name="orders">Orders</param>
+        public virtual byte[] ExportOrdersToCarraXlsx(IList<Order> orders)
+        {
+            //a vendor should have access only to part of order information
+            var ignore = _workContext.CurrentVendor != null;
+
+            //lambda expressions for choosing correct order address
+           /* Address orderAddress(Order o) => _addressService.GetAddressById((o.PickupInStore ? o.PickupAddressId : o.ShippingAddressId) ?? 0);
+            Address orderBillingAddress(Order o) => _addressService.GetAddressById(o.BillingAddressId);*/
+
+            //property array
+            var properties = new[]
+            {
+                new PropertyByName<Order>("Stamp", p=>p.CardName),
+                new PropertyByName<Order>("Order Number", p => p.Id),
+                 new PropertyByName<Order>("Order Date", p => p.CreatedOnUtc.Date),
+                new PropertyByName<Order>("Shipment Date", p=>p.CardName),
+            };
+
+            return ExportOrderToCarraXlsxWithProducts(properties, orders);
         }
 
         /// <summary>

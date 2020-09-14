@@ -2146,6 +2146,8 @@ namespace Nop.Services.Catalog
 
             var productPictures = query.Take(1);
 
+            if (!productPictures.Any())
+                return 0;
             return productPictures.First();
         }
 

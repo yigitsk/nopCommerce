@@ -56,6 +56,12 @@
                             @T("Admin.Common.ExportToExcel.Selected")
                         </button>
                     </li>
+                    <li>
+                        <button type="button" id="exportcarraexcel-selected">
+                            <i class="fa fa-file-excel-o"></i>
+                            Export To Carra Excel
+                        </button>
+                    </li>
                 </ul>
             </div>
             <div class="btn-group">
@@ -493,6 +499,9 @@
 <form asp-controller="Order" asp-action="ExportExcelSelected" method="post" id="export-excel-selected-form">
     <input type="hidden" id="selectedIds" name="selectedIds" value="" />
 </form>
+<form asp-controller="Order" asp-action="ExportExcelCarraSelected" method="post" id="export-excel-carra-selected-form">
+    <input type="hidden" id="selectedIds" name="selectedIds" value="" />
+</form>
 
 <script>
     $(document).ready(function () {
@@ -507,6 +516,26 @@
                 $('#export-excel-selected-form #selectedIds').val(ids);
                 $('#export-excel-selected-form').submit();
                 updateTable('#orders-grid');
+            }
+            return false;
+        });
+        $('#exportcarraexcel-selected').click(function (e) {
+            e.preventDefault();
+            var ids = selectedIds.join(",");
+            if (!ids) {
+                $('#exportExcelSelected-info').text("@T("Admin.Orders.NoOrders")");
+                $("#exportExcelSelected").click();
+            }
+            else {
+                if (ids.includes(",")) {
+                    $('#exportExcelSelected-info').text("Must Selected Only One Order For Carra Excel Export");
+                    $("#exportExcelSelected").click();
+                }
+                else {
+                    $('#export-excel-carra-selected-form #selectedIds').val(ids);
+                    $('#export-excel-carra-selected-form').submit();
+                    updateTable('#orders-grid');
+                }
             }
             return false;
         });

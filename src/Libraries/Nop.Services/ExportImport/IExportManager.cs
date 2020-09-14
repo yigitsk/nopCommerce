@@ -63,6 +63,8 @@ namespace Nop.Services.ExportImport
         /// <param name="orders">Orders</param>
         byte[] ExportOrdersToXlsx(IList<Order> orders);
 
+        byte[] ExportOrdersToCarraXlsx(IList<Order> orders);
+
         /// <summary>
         /// Export customer list to XLSX
         /// </summary>

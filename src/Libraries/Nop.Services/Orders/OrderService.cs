@@ -500,14 +500,16 @@ namespace Nop.Services.Orders
             if (orderId == 0)
                 return new List<OrderItem>();
 
-            return (from oi in _orderItemRepository.Table
-                    join p in _productRepository.Table on oi.ProductId equals p.Id
-                    where
-                    oi.OrderId == orderId &&
-                    (!isShipEnabled.HasValue || (p.IsShipEnabled == isShipEnabled.Value)) &&
-                    (!isNotReturnable.HasValue || (p.NotReturnable == isNotReturnable)) &&
-                    (vendorId <= 0 || (p.VendorId == vendorId))
-                    select oi).ToList();
+            var data = (from oi in _orderItemRepository.Table
+                        join p in _productRepository.Table on oi.ProductId equals p.Id
+                        where
+                        oi.OrderId == orderId &&
+                        (!isShipEnabled.HasValue || (p.IsShipEnabled == isShipEnabled.Value)) &&
+                        (!isNotReturnable.HasValue || (p.NotReturnable == isNotReturnable)) &&
+                        (vendorId <= 0 || (p.VendorId == vendorId))
+                        select oi).ToList();
+
+            return data;
         }
 
         /// <summary>

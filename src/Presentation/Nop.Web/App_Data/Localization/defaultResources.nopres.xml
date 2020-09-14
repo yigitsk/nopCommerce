@@ -4146,6 +4146,9 @@
   <LocaleResource Name="Admin.Common.ExportToExcel.Selected">
     <Value>Export to Excel (selected)</Value>
   </LocaleResource>
+  <LocaleResource Name="Admin.Common.ExportToCarraExcel.Selected">
+      <Value>Export to Carra Excel (selected)</Value>
+  </LocaleResource>
   <LocaleResource Name="Admin.Common.ExportToXml">
     <Value>Export to XML</Value>
   </LocaleResource>

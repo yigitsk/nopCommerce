@@ -499,6 +499,34 @@ namespace Nop.Web.Areas.Admin.Controllers
             }
         }
 
+        [HttpPost]
+        public virtual IActionResult ExportExcelCarraSelected(string selectedIds)
+        {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManageOrders))
+                return AccessDeniedView();
+
+            var orders = new List<Order>();
+            if (selectedIds != null)
+            {
+                var ids = selectedIds
+                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => Convert.ToInt32(x))
+                    .ToArray();
+                orders.AddRange(_orderService.GetOrdersByIds(ids).Where(HasAccessToOrder));
+            }
+
+            try
+            {
+                var bytes = _exportManager.ExportOrdersToCarraXlsx(orders);
+                return File(bytes, MimeTypes.TextXlsx, "orders.xlsx");
+            }
+            catch (Exception exc)
+            {
+                _notificationService.ErrorNotification(exc);
+                return RedirectToAction("List");
+            }
+        }
+
         #endregion
 
         #region Order details
