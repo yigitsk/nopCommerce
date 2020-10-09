@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -37,6 +38,7 @@ using Nop.Services.Stores;
 using Nop.Services.Tax;
 using Nop.Services.Vendors;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace Nop.Services.ExportImport
 {
@@ -742,15 +744,24 @@ namespace Nop.Services.ExportImport
                 var fpWorksheet = xlPackage.Workbook.Worksheets.Add("DataForProductsFilters");
                 fpWorksheet.Hidden = eWorkSheetHidden.VeryHidden;
 
+                int captionStart = 7;
                 //create Headers and format them 
                 var manager = new PropertyManager<Order>(properties, _catalogSettings);
-                manager.WriteCaption(worksheet,7);
-
+                //manager.WriteCaption(worksheet,7);
+                foreach (var caption in properties)
+                {
+                    var cell = worksheet.Cells[captionStart, caption.PropertyOrderPosition + 1];
+                    cell.Value = caption;
+                    SetCaptionStyle(cell);
+                    cell.Style.Hidden = false;
+                    cell = worksheet.Cells[captionStart, caption.PropertyOrderPosition + 1];
+                    cell.Value = caption.PropertyValue;
+                }
                 var row = 8;
                 foreach (var order in itemsToExport)
                 {
                     manager.CurrentObject = order;
-                    manager.WriteToXlsx(worksheet, row++);
+                    manager.WriteToXlsxCarra(worksheet, row++);
 
                     //a vendor should have access only to his products
                     var orderItems = _orderService.GetOrderItems(order.Id, vendorId: _workContext.CurrentVendor?.Id ?? 0);
@@ -762,10 +773,10 @@ namespace Nop.Services.ExportImport
                     worksheet.Row(row).OutlineLevel = 1;
                     worksheet.Row(row).Collapsed = false;
 
-                    foreach (var orederItem in orderItems)
+                    foreach (var orderItem in orderItems)
                     {
                         row++;
-                        orderItemsManager.CurrentObject = orederItem;
+                        orderItemsManager.CurrentObject = orderItem;
                         orderItemsManager.WriteToXlsx(worksheet, row, 2, fpWorksheet);
                         worksheet.Row(row).OutlineLevel = 1;
                         //worksheet.Row(row).Collapsed = true;
@@ -778,6 +789,13 @@ namespace Nop.Services.ExportImport
             }
 
             return stream.ToArray();
+        }
+
+        private void SetCaptionStyle(ExcelRange cell)
+        {
+            cell.Style.Fill.PatternType = ExcelFillStyle.Solid;
+            cell.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(184, 204, 228));
+            cell.Style.Font.Bold = true;
         }
 
         private string GetCustomCustomerAttributes(Customer customer)

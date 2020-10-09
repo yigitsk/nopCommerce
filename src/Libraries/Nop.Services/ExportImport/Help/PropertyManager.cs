@@ -184,7 +184,56 @@ namespace Nop.Services.ExportImport.Help
                 }
             }
         }
-        
+
+        public virtual void WriteToXlsxCarra(ExcelWorksheet worksheet, int row, int cellOffset = 0, ExcelWorksheet fWorksheet = null)
+        {
+            if (CurrentObject == null)
+                return;
+
+            foreach (var prop in _properties.Values)
+            {
+                var cell = worksheet.Cells[row, prop.PropertyOrderPosition + cellOffset];
+                if (prop.IsDropDownCell && _catalogSettings.ExportImportRelatedEntitiesByName)
+                {
+                    var dropDownElements = prop.GetDropDownElements();
+                    if (!dropDownElements.Any())
+                    {
+                        cell.Value = string.Empty;
+                        continue;
+                    }
+
+                    cell.Value = prop.GetItemText(prop.GetProperty(CurrentObject));
+
+                    if (!UseDropdownLists)
+                        continue;
+
+                    var validator = cell.DataValidation.AddListDataValidation();
+
+                    validator.AllowBlank = prop.AllowBlank;
+
+                    if (fWorksheet == null)
+                        continue;
+
+                    var fRow = 1;
+                    foreach (var dropDownElement in dropDownElements)
+                    {
+                        var fCell = fWorksheet.Cells[fRow++, prop.PropertyOrderPosition];
+
+                        if (fCell.Value != null && fCell.Value.ToString() == dropDownElement)
+                            break;
+
+                        fCell.Value = dropDownElement;
+                    }
+
+                    validator.Formula.ExcelFormula = $"{fWorksheet.Name}!{fWorksheet.Cells[1, prop.PropertyOrderPosition].Address}:{fWorksheet.Cells[dropDownElements.Length, prop.PropertyOrderPosition].Address}";
+                }
+                else
+                {
+                    cell.Value = prop.GetProperty(CurrentObject);
+                }
+            }
+        }
+
         /// <summary>
         /// Read object data from XLSX worksheet
         /// </summary>
