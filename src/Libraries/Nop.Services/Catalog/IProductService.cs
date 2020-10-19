@@ -216,6 +216,9 @@ namespace Nop.Services.Catalog
         IList<Product> GetAssociatedProducts(int parentGroupedProductId,
             int storeId = 0, int vendorId = 0, bool showHidden = false);
 
+        IList<Product> GetAddonProducts(int parentGroupedProductId, int CategoryId,
+          int storeId = 0, int vendorId = 0, bool showHidden = false);
+
         /// <summary>
         /// Update product review totals
         /// </summary>

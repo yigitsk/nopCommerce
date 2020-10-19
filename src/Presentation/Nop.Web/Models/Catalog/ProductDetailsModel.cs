@@ -108,6 +108,8 @@ namespace Nop.Web.Models.Catalog
         //a list of associated products. For example, "Grouped" products could have several child "simple" products
         public IList<ProductDetailsModel> AssociatedProducts { get; set; }
 
+        public IList<ProductDetailsModel> AddonProducts { get; set; }
+
         public bool DisplayDiscontinuedMessage { get; set; }
 
         public string CurrentStoreName { get; set; }
