@@ -862,57 +862,24 @@ namespace Nop.Services.Catalog
             return products;
         }
 
-        public virtual IList<Product> GetAddonProducts(int parentGroupedProductId, int CategoryId = 11,
+        public virtual IList<Product> GetAddonProducts(int parentGroupedProductId, int CategoryId = 18,
         int storeId = 0, int vendorId = 0, bool showHidden = false)
         {
             var query = _productRepository.Table;
-            query = query.Where(p => !p.Deleted && p.Published && p.VisibleIndividually);
+            //query = query.Where(p => !p.Deleted && p.Published && p.VisibleIndividually);
 
             //category filtering
             if (CategoryId != null )
             {
-                query = from p in query
+                var query2 = from p in query
                         join pc in _productCategoryRepository.Table on p.Id equals pc.ProductId
-                        where CategoryId == pc.CategoryId
+                        where CategoryId == pc.CategoryId && !p.Deleted &&p.Published && !p.VisibleIndividually
                         select p;
+                var products = query2.ToList();
+                return products;
             }
 
-            var products = query.ToList();
-            return products;
-            /*query = query.Where(x => x.ParentGroupedProductId == parentGroupedProductId);
-            if (!showHidden)
-            {
-                query = query.Where(x => x.Published);
-
-                //available dates
-                query = query.Where(p =>
-                    (!p.AvailableStartDateTimeUtc.HasValue || p.AvailableStartDateTimeUtc.Value < DateTime.UtcNow) &&
-                    (!p.AvailableEndDateTimeUtc.HasValue || p.AvailableEndDateTimeUtc.Value > DateTime.UtcNow));
-            }
-            //vendor filtering
-            if (vendorId > 0)
-            {
-                query = query.Where(p => p.VendorId == vendorId);
-            }
-
-            query = query.Where(x => !x.Deleted);
-            query = query.OrderBy(x => x.DisplayOrder).ThenBy(x => x.Id);
-
-            var products = query.ToList();
-
-            //ACL mapping
-            if (!showHidden)
-            {
-                products = products.Where(x => _aclService.Authorize(x)).ToList();
-            }
-
-            //Store mapping
-            if (!showHidden && storeId > 0)
-            {
-                products = products.Where(x => _storeMappingService.Authorize(x, storeId)).ToList();
-            }
-
-            return products;*/
+            return new List<Product>();
         }
 
         /// <summary>

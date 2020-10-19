@@ -1358,14 +1358,18 @@ namespace Nop.Web.Factories
                 //ensure no circular references
                 if (!isAssociatedProduct)
                 {
-                    /*var associatedProducts = _productService.GetAssociatedProducts(product.Id, _storeContext.CurrentStore.Id);
+                    var associatedProducts = _productService.GetAssociatedProducts(product.Id, _storeContext.CurrentStore.Id);
                     foreach (var associatedProduct in associatedProducts)
-                        model.AssociatedProducts.Add(PrepareProductDetailsModel(associatedProduct, null, true));*/
-
-                    var addOnProducts = _productService.GetAddonProducts(0, 11);
-                    foreach (var addOn in addOnProducts)
-                        model.AddonProducts.Add(PrepareProductDetailsModel(addOn, null, true));
+                        model.AssociatedProducts.Add(PrepareProductDetailsModel(associatedProduct, null, true));
+                    
                 }
+            }
+
+            if (product.Name.Contains("Mix"))
+            {
+                var addOnProducts = _productService.GetAddonProducts(0, 18);
+                foreach (var addOn in addOnProducts)
+                    model.AddonProducts.Add(PrepareProductDetailsModel(addOn, null, true));
             }
 
             return model;

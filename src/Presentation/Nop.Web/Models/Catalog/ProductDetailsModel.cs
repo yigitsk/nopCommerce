@@ -30,6 +30,8 @@ namespace Nop.Web.Models.Catalog
             ProductReviewOverview = new ProductReviewOverviewModel();
             TierPrices = new List<TierPriceModel>();
             ProductEstimateShipping = new ProductEstimateShippingModel();
+            AddonProducts = new List<ProductDetailsModel>();
+            SelectedAddonProducts = new List<SelectedAddOnModel>();
         }
 
         //picture(s)
@@ -109,6 +111,7 @@ namespace Nop.Web.Models.Catalog
         public IList<ProductDetailsModel> AssociatedProducts { get; set; }
 
         public IList<ProductDetailsModel> AddonProducts { get; set; }
+        public IList<SelectedAddOnModel> SelectedAddonProducts { get; set; }
 
         public bool DisplayDiscontinuedMessage { get; set; }
 
