@@ -1,0 +1,16 @@
+@model ProductDetailsModel
+
+ <div>
+   <div class="picture-thumbs">
+      <div class="grid-container">
+          @foreach (var product in Model.AddonProducts )
+           {
+               <div class="grid-item">
+                       <a href="@Url.Action("SelectAddOn", "Product",new {productModelId = Model.Id,slotId = 1,selectedAddonId = product.Id})">
+                   <img style="width:15%;" src="@product.PictureModels.FirstOrDefault().ThumbImageUrl" alt="@product.PictureModels.FirstOrDefault().AlternateText" title="@product.PictureModels.FirstOrDefault().Title" data-defaultsize="@product.PictureModels.FirstOrDefault().ImageUrl" data-fullsize="@product.PictureModels.FirstOrDefault().FullSizeImageUrl"/>
+                        </a></div>
+           }
+      </div>
+    </div>
+</div>
+

@@ -196,6 +196,25 @@ namespace Nop.Web.Controllers
             return View(productTemplateViewPath, model);
         }
 
+        public virtual IActionResult SelectAddOn(int productModelId, int slotId, int selectedAddonId)
+        {
+            var product = _productService.GetProductById(productModelId);
+            var model = _productModelFactory.PrepareProductDetailsModel(product, null, false);
+            if (model.AddonProducts.Any(x => x.Id == selectedAddonId))
+            {
+                var selectedAddOn = model.AddonProducts.Where(x => x.Id == selectedAddonId).First();
+                var addonModel = new SelectedAddOnModel();
+                addonModel.SlotId = slotId;
+                addonModel.ThumbImageUrl = selectedAddOn.DefaultPictureModel.ThumbImageUrl;
+                addonModel.Id = selectedAddonId;
+                model.SelectedAddonProducts.Add(addonModel);
+            }
+            
+            var productTemplateViewPath = _productModelFactory.PrepareProductTemplateViewPath(product);
+
+            return View(productTemplateViewPath, model);
+        }
+
         [HttpPost]
         public virtual IActionResult EstimateShipping([FromQuery] ProductDetailsModel.ProductEstimateShippingModel model, IFormCollection form)
         {
@@ -260,7 +279,7 @@ namespace Nop.Web.Controllers
         }
 
         #endregion
-
+        
         #region Recently viewed products
 
         public virtual IActionResult RecentlyViewedProducts()
