@@ -134,23 +134,22 @@
                         </div>
                         @if (Model.Name.Contains("Mix"))
                         {
-                            <div class="picture-thumbs">
-                                <div class="grid-container">
-                                    @foreach (var product in Model.AddonProducts )
-                                    {
-                                        <div class="grid-item">
-                                            <img style="width:15%;" 
-                                                    src="@product.PictureModels.FirstOrDefault().ThumbImageUrl" 
-                                                    alt="@product.PictureModels.FirstOrDefault().AlternateText" 
-                                                    title="@product.PictureModels.FirstOrDefault().Title" 
-                                                    data-defaultsize="@product.PictureModels.FirstOrDefault().ImageUrl" 
-                                                    data-fullsize="@product.PictureModels.FirstOrDefault().FullSizeImageUrl"
-                                                    onclick="imageClicked(@product.Id, '@product.PictureModels.FirstOrDefault().ThumbImageUrl')"/>
+                              <div class="product-grid" style="border: 2px #0b0b0b;">
+                                            <div class="item-grid" style="border: 2px #0b0b0b;height:350px;overflow: auto;">
+                                                @foreach (var product in Model.AddonProducts)
+                                                {
+                                                    <div class="item-box">
+                                                        <div class="product-item" data-productid="@product.Id">
+                                                            <div class="picture-addon">
+                                                                    <a style=":before padding-top: 100% !important;" title="@Model.DefaultPictureModel.Title">
+                                                                        <img src="@product.PictureModels.FirstOrDefault().ThumbImageUrl" alt="@product.PictureModels.FirstOrDefault().AlternateText" title="@product.PictureModels.FirstOrDefault().Title" onclick="imageClicked(@product.Id, '@product.PictureModels.FirstOrDefault().ThumbImageUrl')"/>
+                                                                    </a>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
                                         </div>
-                                    }
-                                </div>
-                            </div>
-                            //@await Html.PartialAsync("_AddOnGrid",Model)
                         }
                         @await Html.PartialAsync("_ShareButton", Model)
                         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsOverviewBottom, additionalData = Model })
