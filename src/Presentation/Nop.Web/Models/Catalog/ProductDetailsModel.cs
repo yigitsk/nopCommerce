@@ -31,7 +31,6 @@ namespace Nop.Web.Models.Catalog
             TierPrices = new List<TierPriceModel>();
             ProductEstimateShipping = new ProductEstimateShippingModel();
             AddonProducts = new List<ProductDetailsModel>();
-            SelectedAddonProducts = new List<SelectedAddOnModel>();
         }
 
         //picture(s)
@@ -111,7 +110,11 @@ namespace Nop.Web.Models.Catalog
         public IList<ProductDetailsModel> AssociatedProducts { get; set; }
 
         public IList<ProductDetailsModel> AddonProducts { get; set; }
-        public IList<SelectedAddOnModel> SelectedAddonProducts { get; set; }
+        public SelectedAddOnModel AddonProduct1 { get; set; }
+        public SelectedAddOnModel AddonProduct2 { get; set; }
+        public SelectedAddOnModel AddonProduct3 { get; set; }
+        public SelectedAddOnModel AddonProduct4 { get; set; }
+        public SelectedAddOnModel AddonProduct5 { get; set; }
 
         public bool DisplayDiscontinuedMessage { get; set; }
 
