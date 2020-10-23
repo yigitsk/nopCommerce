@@ -48,6 +48,8 @@
     <None Update="Areas\Admin\sitemap.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+
+    <Content Remove="Views\Product\_AddOnGrid.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
