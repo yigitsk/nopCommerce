@@ -1,7 +1,7 @@
 ﻿@model ProductDetailsModel
 @using Nop.Core.Domain.Seo;
 @using Nop.Core.Domain.Orders
-@inject Nop.Core.IWebHelper webHelper 
+@inject Nop.Core.IWebHelper webHelper
 @inject SeoSettings seoSettings
 @{
     Layout = "_ColumnsOne";
@@ -121,8 +121,9 @@
                             {
                                 <input type="button" id="show-design-@Model.Id" class="button-1 add-to-cart-button" value="Show Design" data-productid="@Model.Id" onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.Id, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form');return false;" />
                             }
-                            else{
-                            @await Html.PartialAsync("_AddToCart", Model.AddToCart, dataDictAddToCart)
+                            else
+                            {
+                                @await Html.PartialAsync("_AddToCart", Model.AddToCart, dataDictAddToCart)
                             }
                             @await Html.PartialAsync("_ProductEstimateShipping", Model.ProductEstimateShipping)
                         }
@@ -140,22 +141,22 @@
                         </div>
                         @if (Model.Name.Contains("Mix"))
                         {
-                              <div class="product-grid" style="border: 2px #0b0b0b;">
-                                            <div class="item-grid" style="border: 2px #0b0b0b;height:350px;overflow: auto;">
-                                                @foreach (var product in Model.AddonProducts)
-                                                {
-                                                    <div class="item-box">
-                                                        <div class="product-item" data-productid="@product.Id">
-                                                            <div class="picture-addon">
-                                                                    <a style=":before padding-top: 100% !important;" title="@Model.DefaultPictureModel.Title">
-                                                                        <img src="@product.PictureModels.FirstOrDefault().ThumbImageUrl" alt="@product.PictureModels.FirstOrDefault().AlternateText" title="@product.PictureModels.FirstOrDefault().Title" onclick="imageClicked(@product.Id, '@product.PictureModels.FirstOrDefault().ThumbImageUrl')"/>
-                                                                    </a>
-                                                                </div>
-                                                        </div>
-                                                    </div>
-                                                }
+                            <div class="product-grid" style="border: 2px #0b0b0b;">
+                                <div class="item-grid" style="border: 2px #0b0b0b;height:350px;overflow: auto;">
+                                    @foreach (var product in Model.AddonProducts)
+                                    {
+                                        <div class="item-box">
+                                            <div class="product-item" data-productid="@product.Id">
+                                                <div class="picture-addon">
+                                                    <a style=":before padding-top: 100% !important;" title="@Model.DefaultPictureModel.Title">
+                                                        <img src="@product.PictureModels.FirstOrDefault().ThumbImageUrl" alt="@product.PictureModels.FirstOrDefault().AlternateText" title="@product.PictureModels.FirstOrDefault().Title" onclick="imageClicked(@product.Id, '@product.PictureModels.FirstOrDefault().ThumbImageUrl')" />
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
+                                    }
+                                </div>
+                            </div>
                         }
                         @await Html.PartialAsync("_ShareButton", Model)
                         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsOverviewBottom, additionalData = Model })
@@ -178,12 +179,57 @@
             </div>
         </form>
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBottom, additionalData = Model })
+        <div id="dialog" title="Please Select Slot">
+            <select id="slotSelect">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
     </div>
 </div>
 
 <script>
+    window.onload = (event) => {
+        $("#dialog").dialog({
+            autoOpen: false,
+            width: 350,
+            buttons: [
+                {
+                    text: "Ok",
+                    icon: "ui-icon-plusthick",
+                    click: function () {
+                        slotSelected();
+                        $(this).dialog("close");
+                    }
+                    // Uncommenting the following line would hide the text,
+                    // resulting in the label being used as a tooltip
+                    //showText: false
+                }
+            ]
+        });
+    };
+
     function imageClicked(subProductId, imageUrl) {
-        $("#main-product-img-slot1").attr("src", imageUrl);
-        $("#main-product-img-slot1").attr("data-charmid", subProductId);
+        debugger;
+        $("#dialog").data('subProductId', subProductId).data('imageUrl', imageUrl).dialog("open");
+    }
+
+    function slotSelected() {
+        debugger;
+        var selectedSlot = $("#slotSelect").val();
+        var subProductId = $("#dialog").data('subProductId');
+        var imageUrl = $("#dialog").data('imageUrl');
+        setImage(selectedSlot, subProductId, imageUrl);
+    }
+
+    function setImage(selectedSlot, subProductId, imageUrl) {
+        var str1 = "#main-product-img-slot";
+        var str2 = selectedSlot;
+        var imgId = str1.concat(str2);
+        $(imgId).attr("src", imageUrl);
+        $(imgId).attr("data-charmid", subProductId);
     }
 </script>
