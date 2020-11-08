@@ -119,7 +119,7 @@
                             dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = $"addtocart_{Model.Id}";
                             if (Model.AddonProducts.Any())
                             {
-                                <input type="button" id="show-design-@Model.Id" class="button-1 add-to-cart-button" value="Show Design" data-productid="@Model.Id" onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.Id, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form');return false;" />
+                                <input type="button" id="show-design-@Model.Id" class="button-1 add-to-cart-button" value="Show Design" data-productid="@Model.Id" onclick="ShowDesignClicked()" />
                             }
                             else
                             {
@@ -188,6 +188,24 @@
                 <option value="5">5</option>
             </select>
         </div>
+        <div id="dialog-design">
+         <div class="picture">
+ 
+             <a title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
+                 <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
+                 <img style="width:10%; position: absolute; top:0px; bottom:0px; left:5px; right:unset; transform:rotate(90deg);" 
+                      id="main-product-img-slot1"/>
+                 <img style="width:10%;position: absolute; top:unset; bottom:50px; left:15px; right:unset; transform:rotate(45deg);" 
+                      id="main-product-img-slot2"/>
+                 <img style="width:10%;position: absolute; top:unset; bottom:5px; left:0px; right:0px;transform:rotate(0deg);" 
+                      id="main-product-img-slot3"/>
+                 <img style="width:10%;position: absolute; top:unset; bottom:50px; left:unset; right:15px;transform:rotate(315deg);" 
+                      id="main-product-img-slot4"/>
+                 <img style="width:10%; position: absolute; top: 0px; bottom: 0px; left: unset; right: 5px; transform: rotate(270deg);" 
+                      id="main-product-img-slot5"/>
+             </a>
+         </div>
+        </div>
     </div>
 </div>
 
@@ -210,13 +228,38 @@
                 }
             ]
         });
+        $("#dialog-design").dialog({
+                    autoOpen: false,
+                    width: "70%",
+                    buttons: [
+                        {
+                            text: "Approve",
+                            icon: "ui-icon-plusthick",
+                            click: function () {
+                                ApproveDesing();
+                                $(this).dialog("close");
+                            }
+                            // Uncommenting the following line would hide the text,
+                            // resulting in the label being used as a tooltip
+                            //showText: false
+                        }
+                    ]
+                });
     };
 
     function imageClicked(subProductId, imageUrl) {
         debugger;
         $("#dialog").data('subProductId', subProductId).data('imageUrl', imageUrl).dialog("open");
     }
-
+    
+        function ShowDesignClicked() {
+            debugger;
+            $("#dialog-design").dialog("open");
+        }
+    
+    function ApproveDesing(){
+        
+    }
     function slotSelected() {
         debugger;
         var selectedSlot = $("#slotSelect").val();
