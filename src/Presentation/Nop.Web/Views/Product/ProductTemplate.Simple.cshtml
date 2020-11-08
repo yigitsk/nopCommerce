@@ -194,15 +194,15 @@
              <a title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
                  <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
                  <img style="width:10%; position: absolute; top:0px; bottom:0px; left:5px; right:unset; transform:rotate(90deg);" 
-                      id="main-product-img-slot1"/>
+                      id="final-product-img-slot1"/>
                  <img style="width:10%;position: absolute; top:unset; bottom:50px; left:15px; right:unset; transform:rotate(45deg);" 
                       id="main-product-img-slot2"/>
                  <img style="width:10%;position: absolute; top:unset; bottom:5px; left:0px; right:0px;transform:rotate(0deg);" 
-                      id="main-product-img-slot3"/>
+                      id="final-product-img-slot3"/>
                  <img style="width:10%;position: absolute; top:unset; bottom:50px; left:unset; right:15px;transform:rotate(315deg);" 
-                      id="main-product-img-slot4"/>
+                      id="final-product-img-slot4"/>
                  <img style="width:10%; position: absolute; top: 0px; bottom: 0px; left: unset; right: 5px; transform: rotate(270deg);" 
-                      id="main-product-img-slot5"/>
+                      id="final-product-img-slot5"/>
              </a>
          </div>
         </div>
@@ -248,7 +248,6 @@
     };
 
     function imageClicked(subProductId, imageUrl) {
-        debugger;
         $("#dialog").data('subProductId', subProductId).data('imageUrl', imageUrl).dialog("open");
     }
     
@@ -258,7 +257,20 @@
         }
     
     function ApproveDesing(){
+        if (this.loadWaiting !== false) {
+              return;
+            }
+            this.setLoadWaiting(true);
         
+            $.ajax({
+              cache: false,
+              url: "@Url.RouteUrl("AddDesignToCart_Details", new {productId = 1, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})",
+              data: $(formselector).serialize(),
+              type: "POST",
+              success: this.success_process,
+              complete: this.resetLoadWaiting,
+              error: this.ajaxFailure
+            });
     }
     function slotSelected() {
         debugger;
@@ -266,6 +278,7 @@
         var subProductId = $("#dialog").data('subProductId');
         var imageUrl = $("#dialog").data('imageUrl');
         setImage(selectedSlot, subProductId, imageUrl);
+        setImageForFinal(selectedSlot, subProductId, imageUrl);
     }
 
     function setImage(selectedSlot, subProductId, imageUrl) {
@@ -275,4 +288,11 @@
         $(imgId).attr("src", imageUrl);
         $(imgId).attr("data-charmid", subProductId);
     }
+    function setImageForFinal(selectedSlot, subProductId, imageUrl) {
+            var str1 = "#final-product-img-slot";
+            var str2 = selectedSlot;
+            var imgId = str1.concat(str2);
+            $(imgId).attr("src", imageUrl);
+            $(imgId).attr("data-charmid", subProductId);
+        }
 </script>
