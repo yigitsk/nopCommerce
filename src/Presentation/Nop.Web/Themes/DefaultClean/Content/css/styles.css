@@ -7008,6 +7008,13 @@ pre {
 	width: 24%;
 	margin: 0 0.5% 50px;
 }
+
+  .item-addon-box
+  {
+    width: 24%;
+    margin: 0 0.5% 1px;
+  }
+
 .home-page .product-grid .item-box:nth-child(3n+1),
 .product-details-page .product-grid .item-box:nth-child(3n+1),
 .shopping-cart-page .product-grid .item-box:nth-child(3n+1) {

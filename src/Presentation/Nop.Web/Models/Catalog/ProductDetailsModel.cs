@@ -50,6 +50,8 @@ namespace Nop.Web.Models.Catalog
 
         public bool ShowSku { get; set; }
         public string Sku { get; set; }
+        public decimal Weight { get; set; }
+
 
         public bool ShowManufacturerPartNumber { get; set; }
         public string ManufacturerPartNumber { get; set; }
