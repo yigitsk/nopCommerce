@@ -7,22 +7,37 @@
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })
     @if (Model.DefaultPictureZoomEnabled && Model.PictureModels.Count == 1)
     {
-        <div class="picture">
+    <div class="picture">
 
-            <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
-                <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
-                <img style="width:10%; position: absolute; top:0px; bottom:0px; left:5px; right:unset; transform:rotate(90deg);" 
-                     id="main-product-img-slot1"/>
-                <img style="width:10%;position: absolute; top:unset; bottom:50px; left:15px; right:unset; transform:rotate(45deg);" 
-                     id="main-product-img-slot2"/>
-                <img style="width:10%;position: absolute; top:unset; bottom:5px; left:0px; right:0px;transform:rotate(0deg);" 
-                     id="main-product-img-slot3"/>
-                <img style="width:10%;position: absolute; top:unset; bottom:50px; left:unset; right:15px;transform:rotate(315deg);" 
-                     id="main-product-img-slot4"/>
-                <img style="width:10%; position: absolute; top: 0px; bottom: 0px; left: unset; right: 5px; transform: rotate(270deg);" 
-                     id="main-product-img-slot5"/>
-            </a>
-            <script asp-location="Footer">
+        <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
+            <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
+        </a>
+        <div id="slot1" style="width: 10%; float: left; position: absolute; left: 0%; bottom: 35%;">
+            <img style="position:relative; transform:rotate(90deg);"
+                 id="main-product-img-slot1" />
+            <input type="button" value="Remove" onclick="removeImage(1)" />
+        </div>
+        <div id="slot2" style="width: 10%; float: left; position: absolute; left: 3%; bottom: 5%;">
+            <img style="position:relative; transform:rotate(45deg);"
+                 id="main-product-img-slot2" />
+            <input type="button" value="Remove" onclick="removeImage(2)" />
+        </div>
+        <div id="slot3" style="width: 10%; float: left; position: absolute; left: 45%; bottom: 0%;">
+            <img style="position:relative; transform:rotate(0deg);"
+                 id="main-product-img-slot3" />
+            <input type="button" value="Remove" onclick="removeImage(3)" />
+        </div>
+        <div id="slot4" style="width: 10%; float: left; position: absolute; right: 3%; bottom: 5%;">
+            <img style="position:relative; transform:rotate(315deg);"
+                 id="main-product-img-slot4" />
+            <input type="button" value="Remove" onclick="removeImage(4)" />
+        </div>
+        <div id="slot5" style="width: 10%; float: left; position: absolute; right: 0%; bottom: 35%;">
+            <img style="position:relative; transform:rotate(270deg);"
+                 id="main-product-img-slot5" />
+            <input type="button" value="Remove" onclick="removeImage(5)" />
+        </div>
+        <script asp-location="Footer">
                 $(document).ready(function() {
                     $('#main-product-img-lightbox-anchor-@Model.Id').magnificPopup({
                         type: 'image',
@@ -60,13 +75,8 @@
                         $(this).css("zoom", zoom_percent + "%");
                     });
                 }
-            </script>
-        </div>
-        <input type="button" id="Remove Slot 1" class="button-1 " value="Remove" onclick="removeImage(1)" />
-        <input type="button" id="Remove Slot 2" class="button-1 " value="Remove" onclick="removeImage(2)"  />
-        <input type="button" id="Remove Slot 3" class="button-1 " value="Remove" onclick="removeImage(3)"  />
-        <input type="button" id="Remove Slot 4" class="button-1 " value="Remove" onclick="removeImage(4)"  />
-        <input type="button" id="Remove Slot 5" class="button-1 " value="Remove" onclick="removeImage(5)"  />
+        </script>
+    </div>
     }
     else
     {
@@ -87,14 +97,6 @@
             }
         </div>
         <script asp-location="Footer">
-                        function removeImage(selectedSlot) {
-                                var str1 = "#main-product-img-slot";
-                                var str2 = selectedSlot;
-                                var imgId = str1.concat(str2);
-                                $(imgId).attr("src", null);
-                                $(imgId).attr("data-charmid", null);
-                            };
-            
             $(document).ready(function() {
                 $('.picture-thumbs,.picture').magnificPopup(
                     {

@@ -215,6 +215,12 @@
 
 <script>
     window.onload = (event) => {
+        $("#slot1").hide();
+        $("#slot2").hide();
+        $("#slot3").hide();
+        $("#slot4").hide();
+        $("#slot5").hide();
+
         $("#dialog").dialog({
             autoOpen: false,
             width: 350,
@@ -254,18 +260,18 @@
     function imageClicked(subProductId, imageUrl,weight) {
         $("#dialog").data('subProductId', subProductId).data('imageUrl', imageUrl).data('weight',weight).dialog("open");
     }
-    
-        function ShowDesignClicked() {
-            debugger;
-            $("#dialog-design").dialog("open");
-        }
-    
+
+    function ShowDesignClicked() {
+        debugger;
+        $("#dialog-design").dialog("open");
+    }
+
     function ApproveDesing(){
         if (this.loadWaiting !== false) {
               return;
             }
             this.setLoadWaiting(true);
-        
+
             $.ajax({
               cache: false,
               url: "@Url.RouteUrl("AddDesignToCart_Details", new {productId = 1, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})",
@@ -287,11 +293,25 @@
     }
 
     function setImage(selectedSlot, subProductId, imageUrl) {
-        var str1 = "#main-product-img-slot";
-        var str2 = selectedSlot;
-        var imgId = str1.concat(str2);
+        var imagePrefix = "#main-product-img-slot";
+        var imgId = imagePrefix.concat(selectedSlot);
         $(imgId).attr("src", imageUrl);
         $(imgId).attr("data-charmid", subProductId);
+
+        var slotPrefix = "#slot";
+        var slotId = slotPrefix.concat(selectedSlot);
+        $(slotId).show();
+    }
+
+    function removeImage(removedSlot) {
+        var imagePrefix = "#main-product-img-slot";
+        var imgId = imagePrefix.concat(removedSlot);
+        $(imgId).removeAttr("src");
+        $(imgId).removeAttr("data-charmid");
+
+        var slotPrefix = "#slot";
+        var slotId = slotPrefix.concat(removedSlot);
+        $(slotId).hide();
     }
     function setImageForFinal(selectedSlot, subProductId, imageUrl,weight) {
             var str1 = "#final-product-img-slot";
