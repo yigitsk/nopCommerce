@@ -190,21 +190,34 @@
             </select>
         </div>
         <div id="dialog-design">
-            <div class="picture">
- 
-                <a title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
-                    <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
-                    <img style="width:10%; position: absolute; top:0px; bottom:0px; left:5px; right:unset; transform:rotate(90deg);" 
-                         id="final-product-img-slot1"/>
-                    <img style="width:10%;position: absolute; top:unset; bottom:50px; left:15px; right:unset; transform:rotate(45deg);" 
-                         id="main-product-img-slot2"/>
-                    <img style="width:10%;position: absolute; top:unset; bottom:5px; left:0px; right:0px;transform:rotate(0deg);" 
-                         id="final-product-img-slot3"/>
-                    <img style="width:10%;position: absolute; top:unset; bottom:50px; left:unset; right:15px;transform:rotate(315deg);" 
-                         id="final-product-img-slot4"/>
-                    <img style="width:10%; position: absolute; top: 0px; bottom: 0px; left: unset; right: 5px; transform: rotate(270deg);" 
-                         id="final-product-img-slot5"/>
-                </a>
+            <div style="width:50%; margin:auto; float:none;">
+                <div style="width:100%">
+                    <img alt="@Model.DefaultPictureModel.AlternateText"
+                         src="@Model.DefaultPictureModel.ImageUrl"
+                         title="@Model.DefaultPictureModel.Title"
+                         id="main-product-img-@Model.Id"
+                         style="width:100%;" />
+                    <div style="width:8%; float: left; position: absolute; left: 16%; bottom: 35%;">
+                        <img style="position:relative; width:100%; transform:rotate(90deg);"
+                             id="final-product-img-slot1" />
+                    </div>
+                    <div style="width:8%; float: left; position: absolute; left: 23%; bottom: 5%;">
+                        <img style="position:relative; width:100%; transform:rotate(45deg);"
+                             id="final-product-img-slot2" />
+                    </div>
+                    <div style="width:8%; float: left; position: absolute; left: 46%; bottom: 0%;">
+                        <img style="position:relative; width:100%; transform:rotate(0deg);"
+                             id="final-product-img-slot3" />
+                    </div>
+                    <div style="width:8%; float: left; position: absolute; right: 23%; bottom: 5%;">
+                        <img style="position:relative; width:100%; transform:rotate(315deg);"
+                             id="final-product-img-slot4" />
+                    </div>
+                    <div style="width:8%; float: left; position: absolute; right: 16%; bottom: 35%;">
+                        <img style="position:relative; width:100%; transform:rotate(270deg);"
+                             id="final-product-img-slot5" />
+                    </div>
+                </div>
             </div>
             <div>
                 <h2 id="slotweight1"></h2>
@@ -309,18 +322,23 @@
         $(imgId).removeAttr("src");
         $(imgId).removeAttr("data-charmid");
 
+        var designImagePrefix = "#final-product-img-slot";
+        var designImgId = designImagePrefix.concat(removedSlot);
+        $(designImgId).removeAttr("src");
+        $(designImgId).removeAttr("data-charmid");
+
         var slotPrefix = "#slot";
         var slotId = slotPrefix.concat(removedSlot);
         $(slotId).hide();
     }
-    function setImageForFinal(selectedSlot, subProductId, imageUrl,weight) {
-            var str1 = "#final-product-img-slot";
-            var strweight1 = "#slotweight"
-            var str2 = selectedSlot;
-            var imgId = str1.concat(str2);
-            var weightId = strweight1.concat(str2);
-            $(imgId).attr("src", imageUrl);
-            $(imgId).attr("data-charmid", subProductId);
-            $(weightId).attr("data-weight",weight);
-        }
+    function setImageForFinal(selectedSlot, subProductId, imageUrl, weight) {
+        var str1 = "#final-product-img-slot";
+        var strweight1 = "#slotweight"
+        var str2 = selectedSlot;
+        var imgId = str1.concat(str2);
+        var weightId = strweight1.concat(str2);
+        $(imgId).attr("src", imageUrl);
+        $(imgId).attr("data-charmid", subProductId);
+        $(weightId).attr("data-weight",weight);
+    }
 </script>
