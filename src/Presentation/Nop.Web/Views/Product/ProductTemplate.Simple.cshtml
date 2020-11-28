@@ -220,7 +220,7 @@
                 </div>
             </div>
             <div>
-                <h2 id="slotweight1"></h2>
+                <h1 style="text-align:center" id="totalWeight"></h1>
             </div>
         </div>
     </div>
@@ -275,8 +275,9 @@
     }
 
     function ShowDesignClicked() {
-        debugger;
         $("#dialog-design").dialog("open");
+        getTotalWeight();
+
     }
 
     function ApproveDesing(){
@@ -296,7 +297,6 @@
             });
     }
     function slotSelected() {
-        debugger;
         var selectedSlot = $("#slotSelect").val();
         var subProductId = $("#dialog").data('subProductId');
         var imageUrl = $("#dialog").data('imageUrl');
@@ -339,6 +339,35 @@
         var weightId = strweight1.concat(str2);
         $(imgId).attr("src", imageUrl);
         $(imgId).attr("data-charmid", subProductId);
-        $(weightId).attr("data-weight",weight);
+        $(imgId).attr("data-weight", weight);
+    }
+    function getTotalWeight() {
+        var product = document.getElementById('final-product-img-slot1');
+        var charmWeight = 0;
+        var weight1 = parseFloat(product.getAttribute("data-weight"));
+        if (!isNaN(weight1))
+            charmWeight += weight1;
+        //var weight1 = $("#final-product-img-slot1").getAttribute("data-weight");
+        product = document.getElementById('final-product-img-slot2');
+        var weight2 = parseFloat(product.getAttribute("data-weight"));
+        if (!isNaN(weight2))
+            charmWeight += weight2;
+        product = document.getElementById('final-product-img-slot3');
+        var weight3 = parseFloat(product.getAttribute("data-weight"));
+        if (!isNaN(weight3))
+            charmWeight += weight3;
+        product = document.getElementById('final-product-img-slot4');
+        var weight4 = parseFloat(product.getAttribute("data-weight"));
+        if (!isNaN(weight4))
+            charmWeight += weight4;
+        product = document.getElementById('final-product-img-slot5');
+        var weight5 = parseFloat(product.getAttribute("data-weight"));
+        if (!isNaN(weight5))
+            charmWeight += weight5;
+        var total = charmWeight +@Model.Weight;
+        var totalWeight = document.getElementById('totalWeight')
+        totalWeight.innerHTML = "Total Weight: " + total +" gr";
+        //$("#totalweight").attr("value", total);
+        //alert(total);
     }
 </script>
