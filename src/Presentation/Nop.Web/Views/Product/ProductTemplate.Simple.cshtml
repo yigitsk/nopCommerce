@@ -281,20 +281,39 @@
     }
 
     function ApproveDesing(){
-        if (this.loadWaiting !== false) {
-              return;
-            }
-            this.setLoadWaiting(true);
-
-            $.ajax({
-              cache: false,
-              url: "@Url.RouteUrl("AddDesignToCart_Details", new {productId = 1, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})",
-              data: $(formselector).serialize(),
-              type: "POST",
-              success: this.success_process,
-              complete: this.resetLoadWaiting,
-              error: this.ajaxFailure
-            });
+        AddMainToCart();
+        var product = document.getElementById('final-product-img-slot1');
+        var charmId1 = product.getAttribute("data-charmid");
+        if (!isNaN(charmId1) && charmId1 != null) {
+            AddCharmToCart(charmId1);
+        }
+        product = document.getElementById('final-product-img-slot2');
+        var charmId2 = product.getAttribute("data-charmid");
+        if (!isNaN(charmId2) && charmId2!=null) {
+            AddCharmToCart(charmId2);
+        }
+        product = document.getElementById('final-product-img-slot3');
+        var charmId3 = product.getAttribute("data-charmid");
+        if (!isNaN(charmId3) && charmId3 != null) {
+            AddCharmToCart(charmId3);
+        }
+        product = document.getElementById('final-product-img-slot4');
+        var charmId4 = product.getAttribute("data-charmid");
+        if (!isNaN(charmId4) && charmId4 != null) {
+            AddCharmToCart(charmId4);
+        }
+        product = document.getElementById('final-product-img-slot5');
+         var charmId5 =product.getAttribute("data-charmid");
+        if (!isNaN(charmId5) && charmId5 != null) {
+            AddCharmToCart(charmId5);
+        }
+    }
+    function AddMainToCart() {
+        AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.Id, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form',false); return false;
+    }
+      function AddCharmToCart(charmId) {
+          alert('addon cart');
+          AjaxCart.addproducttocart_details('/addproducttocart/details/' + charmId + '/1', '#product-details-form',false); return false;
     }
     function slotSelected() {
         var selectedSlot = $("#slotSelect").val();

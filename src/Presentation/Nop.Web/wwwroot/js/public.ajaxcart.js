@@ -61,7 +61,7 @@ var AjaxCart = {
   },
 
     //add a product to the cart/wishlist from the product details page
-    addproducttocart_details: function (urladd, formselector) {
+  addproducttocart_details: function (urladd, formselector, async) {
         if (this.loadWaiting !== false) {
             return;
         }
@@ -70,6 +70,7 @@ var AjaxCart = {
         $.ajax({
             cache: false,
             url: urladd,
+            async: async,
             data: $(formselector).serialize(),
             type: "POST",
             success: this.success_process,

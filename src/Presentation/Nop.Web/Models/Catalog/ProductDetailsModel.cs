@@ -112,11 +112,11 @@ namespace Nop.Web.Models.Catalog
         public IList<ProductDetailsModel> AssociatedProducts { get; set; }
 
         public IList<ProductDetailsModel> AddonProducts { get; set; }
-        public SelectedAddOnModel AddonProduct1 { get; set; }
-        public SelectedAddOnModel AddonProduct2 { get; set; }
-        public SelectedAddOnModel AddonProduct3 { get; set; }
-        public SelectedAddOnModel AddonProduct4 { get; set; }
-        public SelectedAddOnModel AddonProduct5 { get; set; }
+        public int AddonProduct1 { get; set; }
+        public int AddonProduct2 { get; set; }
+        public int AddonProduct3 { get; set; }
+        public int AddonProduct4 { get; set; }
+        public int AddonProduct5 { get; set; }
 
         public bool DisplayDiscontinuedMessage { get; set; }
 
