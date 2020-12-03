@@ -5,13 +5,15 @@
 }
 <div class="gallery">
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })
-    @if (Model.DefaultPictureZoomEnabled && Model.PictureModels.Count == 1 && !string.IsNullOrEmpty(Model.MetaKeywords) && Model.MetaKeywords.Contains("Mix"))
+    @if (Model.DefaultPictureZoomEnabled && Model.PictureModels.Count == 1)
     {
     <div class="picture">
 
         <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
             <img style="zoom: 75%; bottom: 120px;" alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
         </a>
+        @if(!string.IsNullOrEmpty(Model.MetaKeywords) && Model.MetaKeywords.Contains("Mix"))
+        {
         <div style="width: 8%; float: left; position: absolute; left: 7%; bottom: 55%;">
             <img style="position:relative; transform:rotate(70deg);"
                  id="main-product-img-slot1" />
@@ -42,6 +44,7 @@
             <div><b>Slot 5</b></div>
             <input id="slot5" type="button" value="Remove" onclick="removeImage(5)" />
         </div>
+        }
         <script asp-location="Footer">
                 $(document).ready(function() {
                     $('#main-product-img-lightbox-anchor-@Model.Id').magnificPopup({
