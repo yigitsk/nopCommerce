@@ -5,42 +5,42 @@
 }
 <div class="gallery">
     @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })
-    @if (Model.DefaultPictureZoomEnabled && Model.PictureModels.Count == 1)
+    @if (Model.DefaultPictureZoomEnabled && Model.PictureModels.Count == 1 && !string.IsNullOrEmpty(Model.MetaKeywords) && Model.MetaKeywords.Contains("Mix"))
     {
     <div class="picture">
 
         <a href="@Model.DefaultPictureModel.FullSizeImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-lightbox-anchor-@Model.Id">
-            <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
+            <img style="zoom: 75%; bottom: 120px;" alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" id="main-product-img-@Model.Id" />
         </a>
-        <div id="slot1" style="width: 10%; float: left; position: absolute; left: 0%; bottom: 35%;">
-            <img style="position:relative; transform:rotate(90deg);"
+        <div style="width: 8%; float: left; position: absolute; left: 7%; bottom: 55%;">
+            <img style="position:relative; transform:rotate(70deg);"
                  id="main-product-img-slot1" />
             <div><b>Slot 1</b></div>
-            <input type="button" value="Remove" onclick="removeImage(1)" />
+            <input id="slot1" type="button" value="Remove" onclick="removeImage(1)" />
         </div>
-        <div id="slot2" style="width: 10%; float: left; position: absolute; left: 3%; bottom: 5%;">
+        <div style="width: 8%; float: left; position: absolute; left: 12%; bottom: 17%;">
             <img style="position:relative; transform:rotate(45deg);"
                  id="main-product-img-slot2" />
             <div><b>Slot 2</b></div>
-            <input type="button" value="Remove" onclick="removeImage(2)" />
+            <input id="slot2" type="button" value="Remove" onclick="removeImage(2)" />
         </div>
-        <div id="slot3" style="width: 10%; float: left; position: absolute; left: 45%; bottom: 0%;">
+        <div style="width: 8%; float: left; position: absolute; left: 45%; bottom: 4%;">
             <img style="position:relative; transform:rotate(0deg);"
                  id="main-product-img-slot3" />
             <div><b>Slot 3</b></div>
-            <input type="button" value="Remove" onclick="removeImage(3)" />
+            <input id="slot3" type="button" value="Remove" onclick="removeImage(3)" />
         </div>
-        <div id="slot4" style="width: 10%; float: left; position: absolute; right: 3%; bottom: 5%;">
+        <div style="width: 8%; float: left; position: absolute; right: 12%; bottom: 17%;">
             <img style="position:relative; transform:rotate(315deg);"
                  id="main-product-img-slot4" />
             <div><b>Slot 4</b></div>
-            <input type="button" value="Remove" onclick="removeImage(4)" />
+            <input id="slot4" type="button" value="Remove" onclick="removeImage(4)" />
         </div>
-        <div id="slot5" style="width: 10%; float: left; position: absolute; right: 0%; bottom: 35%;">
-            <img style="position:relative; transform:rotate(270deg);"
+        <div style="width: 8%; float: left; position: absolute; right: 7%; bottom: 55%;">
+            <img style="position:relative; transform:rotate(290deg);"
                  id="main-product-img-slot5" />
             <div><b>Slot 5</b></div>
-            <input type="button" value="Remove" onclick="removeImage(5)" />
+            <input id="slot5" type="button" value="Remove" onclick="removeImage(5)" />
         </div>
         <script asp-location="Footer">
                 $(document).ready(function() {
