@@ -1366,7 +1366,7 @@ namespace Nop.Web.Factories
                 }
             }
 
-            if (product.Name.Contains("Mix"))
+            if (product.MetaKeywords!=null && product.MetaKeywords.Contains("Mix"))
             {
                 var addOnProducts = _productService.GetAddonProducts(0, 18);
                 foreach (var addOn in addOnProducts)
