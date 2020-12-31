@@ -88,6 +88,13 @@ namespace Nop.Services.Catalog
         Category GetCategoryById(int categoryId);
 
         /// <summary>
+        /// Gets a category
+        /// </summary>
+        /// <param name="categoryName">Category name</param>
+        /// <returns>Category</returns>
+        Category GetCategoryByName(string name);
+
+        /// <summary>
         /// Get categories for which a discount is applied
         /// </summary>
         /// <param name="discountId">Discount identifier; pass null to load all records</param>

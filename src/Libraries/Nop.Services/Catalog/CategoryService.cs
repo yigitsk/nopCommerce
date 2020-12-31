@@ -882,6 +882,18 @@ namespace Nop.Services.Catalog
             });
         }
 
+        public Category GetCategoryByName(string name)
+        {
+            if (name == string.Empty)
+                return null;
+
+            var query = from p in _categoryRepository.Table
+                        where p.Name == name
+                        select p;
+
+            return query.FirstOrDefault();
+        }
+
         #endregion
     }
 }

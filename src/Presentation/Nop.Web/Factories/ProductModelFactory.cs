@@ -1368,7 +1368,8 @@ namespace Nop.Web.Factories
 
             if (product.MetaKeywords!=null && product.MetaKeywords.Contains("Mix"))
             {
-                var addOnProducts = _productService.GetAddonProducts(0, 18);
+                var charmCategory = _categoryService.GetCategoryByName("Charms");
+                var addOnProducts = _productService.GetAddonProducts(0, charmCategory.Id);
                 foreach (var addOn in addOnProducts)
                     model.AddonProducts.Add(PrepareProductDetailsModel(addOn, null, true));
             }
