@@ -22,6 +22,7 @@ namespace Nop.Data
         /// <returns>Entity</returns>
         TEntity GetById(object id);
 
+
         /// <summary>
         /// Insert entity
         /// </summary>

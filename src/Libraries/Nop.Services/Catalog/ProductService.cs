@@ -874,6 +874,7 @@ namespace Nop.Services.Catalog
                 var query2 = from p in query
                         join pc in _productCategoryRepository.Table on p.Id equals pc.ProductId
                         where CategoryId == pc.CategoryId && !p.Deleted &&p.Published && !p.VisibleIndividually
+                        orderby pc.DisplayOrder
                         select p;
                 var products = query2.ToList();
                 return products;
