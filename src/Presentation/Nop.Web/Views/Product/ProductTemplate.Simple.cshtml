@@ -190,23 +190,35 @@
             </select>
         </div>
         <div id="dialog-design">
-            <div style="width:50%; margin:auto; float:none;">
+            <div class="picture" style="width:50%; margin:auto; float:none;">
                 <div style="width:100%">
                     <img alt="@Model.DefaultPictureModel.AlternateText"
                          src="@Model.DefaultPictureModel.ImageUrl"
                          title="@Model.DefaultPictureModel.Title"
                          id="main-product-img-@Model.Id"
                          style="width:100%;" />
-                    <img style="position: absolute; transform: rotate(85deg); width: 8%; float: left; left: 15%; bottom: 450px;"
-                         id="final-product-img-slot1" />
-                    <img style="position: absolute; transform: rotate(45deg); width: 8%; float: left; left: 25%; bottom: 130px;"
-                         id="final-product-img-slot2" />
-                    <img style="position: absolute; transform: rotate(0deg); width: 8%; float: left; left: 46%; bottom: 50px;"
-                         id="final-product-img-slot3" />
-                    <img style="position: absolute; transform: rotate(315deg) scaleX(-1); width: 8%; float: left; right: 25%; bottom: 130px;"
-                         id="final-product-img-slot4" />
-                    <img style="position: absolute; transform: rotate(275deg) scaleX(-1); width: 8%; float: left; right: 15%; bottom: 450px;"
-                         id="final-product-img-slot5" />
+                    <div style="width: 10%; float: left; position: absolute; left: 20%; bottom: 65%;">
+                        <img style="transform: rotate(85deg);"
+                             id="final-product-img-slot1" />
+                    </div>
+                    <div style="width: 100%; float: left; position: absolute; left: 25%; bottom: 25%;">
+                        <img style="transform: rotate(45deg);"
+                             id="final-product-img-slot2" />
+                    </div>
+                    <div style="width: 100%; float: left; position: absolute; left: 45%; bottom: 15%;">
+                        <img style="transform: rotate(0deg);"
+                             id="final-product-img-slot3" />
+                    </div>
+                    <div style="width: 100%; float: left; position: absolute; right: 25%; bottom: 25%;">
+
+                        <img style="transform: rotate(315deg) scaleX(-1);"
+                             id="final-product-img-slot4" />
+                    </div>
+                    <div style="width: 100%; float: left; position: absolute; right: 15%; bottom: 65%;">
+                        <img style="transform: rotate(275deg) scaleX(-1);"
+                             id="final-product-img-slot5" />
+                    </div>
+
                 </div>
             </div>
             <div style="padding-top:150px">
