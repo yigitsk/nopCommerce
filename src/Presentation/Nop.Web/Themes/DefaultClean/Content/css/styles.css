@@ -7495,3 +7495,56 @@ pre {
 }
 
 }
+
+.necklace-picture {
+  width: 100%;
+  margin: auto;
+  float: none;
+  text-align: center;
+}
+
+.necklace-charm {
+  float: left;
+  position: absolute;
+  left: 30%;
+  bottom: 55%;
+}
+
+.design-dialog {
+  width: auto;
+  min-height: 7.625px;
+  max-height: none;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.necklace {
+  text-align: center;
+}
+
+.necklace-left {
+  display: inline-flex;
+  flex-direction: column;
+  height: 100%;
+  display: block;
+  min-height: 100%;
+}
+
+  .necklace-left div:nth-child(1).necklace-charm {
+    display: inline-flex;
+    flex-direction: column;
+    height: 100%;
+    /* align-content: center; */
+    /* margin: auto 0; */
+    /* display: inline-table; */
+    /* margin-top: 11%; */
+    display: block;
+    min-height: 100%;
+  }
+
+  .necklace-left div:nth-child(2).necklace-charm {
+    margin-top: 201%;
+  }

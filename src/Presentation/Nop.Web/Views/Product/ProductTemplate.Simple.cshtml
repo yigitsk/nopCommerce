@@ -189,36 +189,38 @@
                 <option value="5">5</option>
             </select>
         </div>
-        <div id="dialog-design">
-            <div class="picture" style="width:50%; margin:auto; float:none;">
-                <div style="width:100%">
+        <div id="dialog-design" class="design-dialog">
+            <div class="necklace-left">
+                <div class="picture necklace-charm">
+                    <img style="transform: rotate(85deg);"
+                         id="final-product-img-slot1" />
+                </div>
+                <div class="picture necklace-charm">
+                    <img style="transform: rotate(45deg);"
+                         id="final-product-img-slot2" />
+                </div>
+            </div>
+            <div class="necklace">
+                <div class="picture necklace-picture" style="display:inline-block">
                     <img alt="@Model.DefaultPictureModel.AlternateText"
                          src="@Model.DefaultPictureModel.ImageUrl"
                          title="@Model.DefaultPictureModel.Title"
                          id="main-product-img-@Model.Id"
                          style="width:100%;" />
-                    <div style="width: 10%; float: left; position: absolute; left: 20%; bottom: 65%;">
-                        <img style="transform: rotate(85deg);"
-                             id="final-product-img-slot1" />
-                    </div>
-                    <div style="width: 100%; float: left; position: absolute; left: 25%; bottom: 25%;">
-                        <img style="transform: rotate(45deg);"
-                             id="final-product-img-slot2" />
-                    </div>
-                    <div style="width: 100%; float: left; position: absolute; left: 45%; bottom: 15%;">
-                        <img style="transform: rotate(0deg);"
-                             id="final-product-img-slot3" />
-                    </div>
-                    <div style="width: 100%; float: left; position: absolute; right: 25%; bottom: 25%;">
-
-                        <img style="transform: rotate(315deg) scaleX(-1);"
-                             id="final-product-img-slot4" />
-                    </div>
-                    <div style="width: 100%; float: left; position: absolute; right: 15%; bottom: 65%;">
-                        <img style="transform: rotate(275deg) scaleX(-1);"
-                             id="final-product-img-slot5" />
-                    </div>
-
+                </div>
+                <div class="picture necklace-charm" style="text-align:center">
+                    <img style="transform: rotate(0deg);"
+                         id="final-product-img-slot3" />
+                </div>
+            </div>
+            <div class="necklace-right">
+                <div class="picture necklace-charm">
+                    <img style="transform: rotate(315deg) scaleX(-1);"
+                         id="final-product-img-slot4" />
+                </div>
+                <div class="picture necklace-charm">
+                    <img style="transform: rotate(275deg) scaleX(-1);"
+                         id="final-product-img-slot5" />
                 </div>
             </div>
             <div style="padding-top:150px">
@@ -254,7 +256,8 @@
             ]
         });
         $("#dialog-design").dialog({
-                    autoOpen: false,
+            autoOpen: false,
+            resizable: false,
                     width: "70%",
                     buttons: [
                         {
@@ -386,7 +389,7 @@
             charmWeight += weight5;
         var total = charmWeight +@Model.Weight;
         var totalWeight = document.getElementById('totalWeight')
-        totalWeight.innerHTML = "Total Weight: " + total +" gr";
+        totalWeight.innerHTML = "Total Weight: " + total.toFixed(2) +" gr";
         //$("#totalweight").attr("value", total);
         //alert(total);
     }

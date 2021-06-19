@@ -1,0 +1,5 @@
+﻿{
+  "DataConnectionString": "server=localhost;database=carrajewellery;allowuservariables=True;user id=root;password=Hrd2Frgt",
+  "DataProvider": "mysql",
+  "RawDataSettings": {}
+}
