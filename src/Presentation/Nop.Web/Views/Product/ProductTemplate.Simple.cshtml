@@ -190,40 +190,43 @@
             </select>
         </div>
         <div id="dialog-design" class="design-dialog">
-            <div class="necklace-left">
-                <div class="picture necklace-charm">
-                    <img style="transform: rotate(85deg);"
-                         id="final-product-img-slot1" />
+            <div id="necklace-wrapper" style="display: flex; justify-content: center; align-items: center;">
+                <div class="necklace-left">
+                    <div class="picture necklace-charm">
+                        <img style="transform: rotate(85deg) translateY(1em);"
+                             id="final-product-img-slot1" />
+                    </div>
+                    <div class="picture necklace-charm">
+                        <img style="transform: rotate(45deg) translateX(1.2em) translateY(1.2em);"
+                             id="final-product-img-slot2" />
+                    </div>
                 </div>
-                <div class="picture necklace-charm">
-                    <img style="transform: rotate(45deg);"
-                         id="final-product-img-slot2" />
+                <div class="necklace">
+                    <div class="picture necklace-picture" style="display:inline-block">
+                        <img alt="@Model.DefaultPictureModel.AlternateText"
+                             src="@Model.DefaultPictureModel.ImageUrl"
+                             title="@Model.DefaultPictureModel.Title"
+                             id="main-product-img-@Model.Id"
+                             style="width:100%;" />
+                    </div>
+                    <div class="picture necklace-charm">
+                        <img style="transform: rotate(0deg);"
+                             id="final-product-img-slot3" />
+                    </div>
+                </div>
+                <div class="necklace-right">
+
+                    <div class="picture necklace-charm">
+                        <img style="transform: rotate(275deg) scaleX(-1) translateY(1em);"
+                             id="final-product-img-slot5" />
+                    </div>
+                    <div class="picture necklace-charm">
+                        <img style="transform: rotate(315deg) scaleX(-1) translateX(1.2em) translateY(1.2em);"
+                             id="final-product-img-slot4" />
+                    </div>
                 </div>
             </div>
-            <div class="necklace">
-                <div class="picture necklace-picture" style="display:inline-block">
-                    <img alt="@Model.DefaultPictureModel.AlternateText"
-                         src="@Model.DefaultPictureModel.ImageUrl"
-                         title="@Model.DefaultPictureModel.Title"
-                         id="main-product-img-@Model.Id"
-                         style="width:100%;" />
-                </div>
-                <div class="picture necklace-charm" style="text-align:center">
-                    <img style="transform: rotate(0deg);"
-                         id="final-product-img-slot3" />
-                </div>
-            </div>
-            <div class="necklace-right">
-                <div class="picture necklace-charm">
-                    <img style="transform: rotate(315deg) scaleX(-1);"
-                         id="final-product-img-slot4" />
-                </div>
-                <div class="picture necklace-charm">
-                    <img style="transform: rotate(275deg) scaleX(-1);"
-                         id="final-product-img-slot5" />
-                </div>
-            </div>
-            <div style="padding-top:150px">
+            <div  >
                 <h1 style="text-align:center" id="totalWeight"></h1>
             </div>
         </div>
